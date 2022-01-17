@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace Oberleitner_Schnellnberger_FinalProject
 {
-    internal class Program
+    internal class Bank
     {
-        static void Main(string[] args)
-        {
-
-        }
     }
 }
