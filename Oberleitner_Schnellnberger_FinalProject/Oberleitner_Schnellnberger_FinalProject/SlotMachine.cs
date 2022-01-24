@@ -16,15 +16,19 @@ namespace Oberleitner_Schnellnberger_FinalProject
             Console.WriteLine("Please type \"P\" to confirm");
             Console.WriteLine("Please type \"X\" to exit");
             string inputUser=Console.ReadLine().ToLower();
-            bool validInput = false;
+            bool validInputMoney = false;
             while (inputUser != "x")
             {
-                while (validInput == false)
+                while (validInputMoney == false)
                 {
-                    Console.WriteLine("How much money do you want to set (Format: 00.00§)");
+                    Console.WriteLine("How much money do you want to set (Format: 00.00) in §");
                     string userMoneySet = Console.ReadLine();
-                    validInput = int.TryParse(userMoneySet, out int InsertOfUser);
+                    validInputMoney = int.TryParse(userMoneySet, out int InsertOfUser);
                 }
+             
+
+
+
 
 
             }
