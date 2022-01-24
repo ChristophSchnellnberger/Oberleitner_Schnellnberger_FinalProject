@@ -13,9 +13,52 @@ namespace Oberleitner_Schnellnberger_FinalProject
         {
 
         }
-        private static void MainMenue()
+        private static int[] MainMenue()
         {
+            List<int> allChosenValues = new List<int>();
+            #region Login/Register
+            Console.WriteLine("----Welcome to the world of gaming----");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("Press: \n \"1\" for Login \n \"2\" for Register");
+            Console.WriteLine();
 
+            int userinput = CheckDatasFromMainMenue();
+            #endregion
+
+            Console.WriteLine();
+            Console.WriteLine("Press: \n \"1\" Change \n \"2\" ");
+
+            return allChosenValues.ToArray();
+        }
+        private static int CheckDatasFromMainMenue()
+        {
+            int choosennumber = 0;
+
+            try
+            {
+                string userinput = Console.ReadLine();
+                userinput = userinput.ToLower();
+                userinput = userinput.Trim();
+                bool conversionSuccessful = int.TryParse(userinput, out choosennumber);
+                if (!conversionSuccessful)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Your input is not a number \n \n Please try again");
+                    Console.ResetColor();
+                    choosennumber = -1;
+                }
+            }
+            #region catches
+            catch (Exception ex)
+            {
+                int error = GetErrorCodeFromExeption(ex);
+                Program.PrintErrorMessage(error);
+            }
+            
+            #endregion
+
+            return choosennumber;
         }
         public static void PrintErrorMessage(int errorCode)
         {
@@ -27,7 +70,6 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.DarkRed;
             }
-
             if (errorCode == 1)
             {
                 Console.WriteLine("The argument is null or empty");
