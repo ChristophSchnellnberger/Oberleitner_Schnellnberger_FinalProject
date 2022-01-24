@@ -13,7 +13,6 @@ namespace Oberleitner_Schnellnberger_FinalProject
         private double _balance;
         #endregion
 
-
         #region public properties
         public double Balance
         {
