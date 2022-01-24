@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace Oberleitner_Schnellnberger_FinalProject
 {
@@ -16,10 +18,31 @@ namespace Oberleitner_Schnellnberger_FinalProject
         private static int[] MainMenue()
         {
             List<int> allChosenValues = new List<int>();
-            bool conversionSuccessful = false;
+            bool conversionSuccessful = true;
             int userinput = 0;
+            ConsoleColor[] colors = (ConsoleColor[])ConsoleColor.GetValues(typeof(ConsoleColor));
+            do
+            {
+                foreach (var colour in colors)
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = colour;
+                    Console.WriteLine("----Welcome to the world of gaming----");
+                    Console.WriteLine();
+                    Console.WriteLine("--Press enter to get to main menu--");
+                    Thread.Sleep(100);
 
-            Console.WriteLine("----Welcome to the world of gaming----");
+                }
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("Press any other key to see the welcome graphics again ;)");
+                Console.ResetColor();
+                if (Console.ReadKey(true).Key == ConsoleKey.Enter)
+                {
+                    conversionSuccessful = false;
+                    Console.Clear();
+                }
+            } while (conversionSuccessful);           
 
             #region Login/Register
             do
