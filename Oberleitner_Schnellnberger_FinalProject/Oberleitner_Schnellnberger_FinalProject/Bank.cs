@@ -10,38 +10,16 @@ namespace Oberleitner_Schnellnberger_FinalProject
     {
         #region private members
         //Kontostand=balance!
-        private double _balancePlayer;
-        private double _balanceCasino;
+        private double _balance;
         #endregion
 
-        #region public properties
-        public double BalancePlayer
-        {
-            get
-            {
-                return _balancePlayer;
-            }
-            set
-            {
-                //Check MinMax
-                bool correctInput = CheckValidData(value);
-                if (correctInput == true)
-                {
-                    _balancePlayer = value;
-                }
-                else
-                {
-                    int error = 15;
-                    Program.PrintErrorMessage(error);
-                }
-            }
-        }
 
-        public double BalanceCasino
+        #region public properties
+        public double Balance
         {
             get
             {
-                return _balanceCasino;
+                return _balance;
             }
             set
             {
@@ -49,7 +27,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 bool correctInput = CheckValidData(value);
                 if (correctInput == true)
                 {
-                    _balanceCasino = value;
+                    _balance = value;
                 }
                 else
                 {
@@ -61,17 +39,15 @@ namespace Oberleitner_Schnellnberger_FinalProject
         #endregion
 
         #region constructor
-        public Bank (int balancePlayer, int balanceBank)
+        public Bank (double balance)
         {
-            _balancePlayer = balancePlayer;
-            _balanceCasino = balanceBank;
+            Balance=balance;
         }
 
         public Bank()
-            //Default Constructor (Welcome Bonus 10€ for Player)
+            //Default Constructor (Welcome Bonus 10€)
         {
-            _balanceCasino = 100;
-            _balancePlayer = 10;
+            Balance = 10;
         }
         #endregion
 
@@ -99,12 +75,11 @@ namespace Oberleitner_Schnellnberger_FinalProject
             return validInput;
         }
 
-        public static void ChargeBankBalance(double inputData)
+        public static void ChargeBalance(Bank bank, double inputData)
         {
             if(CheckValidData(inputData)==true)
             {
-                
-
+                bank.Balance = bank.Balance + inputData;
             }
             else
             {
@@ -115,11 +90,11 @@ namespace Oberleitner_Schnellnberger_FinalProject
 
         }
 
-        public static void ReduceBankBalance(double inputData)
+        public static void ReduceBalance(Bank bank, double inputData)
         {
             if (CheckValidData(inputData) == true)
             {
-
+                bank.Balance = bank.Balance - inputData;
             }
             else
             {
@@ -128,33 +103,9 @@ namespace Oberleitner_Schnellnberger_FinalProject
             }
         }
 
-        public static void ChargePlayerBalance(double inputData)
-        {
-            if (CheckValidData(inputData) == true)
-            {
+       
 
-            }
-            else
-            {
-                int error = 15;
-                Program.PrintErrorMessage(error);
-            }
-
-        }
-
-        public static void ReducePlayerBalance(double inputData)
-        {
-            if (CheckValidData(inputData) == true)
-            {
-
-            }
-            else
-            {
-                int error = 15;
-                Program.PrintErrorMessage(error);
-            }
-
-        }
+        
 
         #endregion
 

@@ -8,5 +8,11 @@ namespace Oberleitner_Schnellnberger_FinalProject
 {
     internal class Casino
     {
+
+        public static void Main()
+        {
+            Bank bank=new Bank();
+            Bank.ChargeBalance(bank, 1);
+        }
     }
 }
