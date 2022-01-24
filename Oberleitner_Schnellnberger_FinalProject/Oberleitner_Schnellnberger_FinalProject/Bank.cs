@@ -23,8 +23,16 @@ namespace Oberleitner_Schnellnberger_FinalProject
             }
             set
             {
-                //Check correct input!!
-                //kein negativer wert, max. werte, ect...
+                //Check MinMax
+                bool correctInput = CheckValidData(value);
+                if (correctInput == true)
+                {
+                    _balancePlayer = value;
+                }
+                else
+                {
+                    throw new Exception(ArgumentOutOfRangeException);
+                }
             }
         }
 
@@ -61,6 +69,27 @@ namespace Oberleitner_Schnellnberger_FinalProject
         //1. Kredit aufladen/abheben
         //2. Zwischenspeicher
         //3. Gewinne/Verluste/Abzug KeSt
+        private static bool CheckValidData(double inputData)
+        {
+            bool validInput = false;
+            int counterVality = 2;
+            int counter = 0;
+            if (inputData > 0)
+            {
+                counter++;
+            }
+            if (inputData < 1000)
+            {
+                counter++;
+            }
+            if (counterVality == counter)
+            {
+                validInput = true;
+            }
+            return validInput;
+        }
+
+
         #endregion
 
     }
