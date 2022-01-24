@@ -99,6 +99,62 @@ namespace Oberleitner_Schnellnberger_FinalProject
             return validInput;
         }
 
+        public static void ChargeBankBalance(double inputData)
+        {
+            if(CheckValidData(inputData)==true)
+            {
+                
+
+            }
+            else
+            {
+                int error = 15;
+                Program.PrintErrorMessage(error);
+            }
+
+
+        }
+
+        public static void ReduceBankBalance(double inputData)
+        {
+            if (CheckValidData(inputData) == true)
+            {
+
+            }
+            else
+            {
+                int error = 15;
+                Program.PrintErrorMessage(error);
+            }
+        }
+
+        public static void ChargePlayerBalance(double inputData)
+        {
+            if (CheckValidData(inputData) == true)
+            {
+
+            }
+            else
+            {
+                int error = 15;
+                Program.PrintErrorMessage(error);
+            }
+
+        }
+
+        public static void ReducePlayerBalance(double inputData)
+        {
+            if (CheckValidData(inputData) == true)
+            {
+
+            }
+            else
+            {
+                int error = 15;
+                Program.PrintErrorMessage(error);
+            }
+
+        }
 
         #endregion
 
