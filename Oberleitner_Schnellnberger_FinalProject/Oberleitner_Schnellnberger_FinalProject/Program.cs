@@ -16,18 +16,70 @@ namespace Oberleitner_Schnellnberger_FinalProject
         private static int[] MainMenue()
         {
             List<int> allChosenValues = new List<int>();
-            #region Login/Register
-            Console.WriteLine("----Welcome to the world of gaming----");
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("Press: \n \"1\" for Login \n \"2\" for Register");
-            Console.WriteLine();
+            bool conversionSuccessful = false;
+            int userinput = 0;
 
-            int userinput = CheckDatasFromMainMenue();
+            #region Login/Register
+            do
+            {
+                Console.WriteLine("----Welcome to the world of gaming----");
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("Press: \n \"1\" for Login \n \"2\" for Register");
+                Console.WriteLine();
+
+                userinput = CheckDatasFromMainMenue();
+
+                if (userinput == -1)
+                {
+                    conversionSuccessful = false;
+                }
+                else
+                {
+                    allChosenValues.Add(userinput);
+                }
+            } while (!conversionSuccessful);
             #endregion
 
-            Console.WriteLine();
-            Console.WriteLine("Press: \n \"1\" Change \n \"2\" ");
+            #region Games/Account/Credit
+            do
+            {
+                Console.WriteLine();
+                Console.WriteLine("Press: \n \"1\" Play games \n \"2\" Your Account \n \"3\" Top out/pay out your credit");
+                Console.WriteLine();
+
+                userinput = CheckDatasFromMainMenue();
+                if (userinput == -1)
+                {
+                    conversionSuccessful = false;
+                }
+                else
+                {
+                    allChosenValues.Add(userinput);
+                }
+            } while (!conversionSuccessful);
+            #endregion
+
+            #region Games
+            do
+            {
+                Console.WriteLine();
+                Console.WriteLine("Choose the game you want to play");
+                Console.WriteLine();
+                Console.WriteLine("Press: \n \"1\" Slot machine \n \"2\" Shell game \"3\" BlackJack");
+                Console.WriteLine();
+
+                userinput = CheckDatasFromMainMenue();
+                if (userinput == -1)
+                {
+                    conversionSuccessful = false;
+                }
+                else
+                {
+                    allChosenValues.Add(userinput);
+                }
+            } while (!conversionSuccessful);           
+            #endregion
 
             return allChosenValues.ToArray();
         }
