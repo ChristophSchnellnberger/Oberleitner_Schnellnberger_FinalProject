@@ -11,7 +11,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
     {
         static void Main(string[] args)
         {
-
+            MainMenue();
         }
         private static int[] MainMenue()
         {
@@ -19,10 +19,12 @@ namespace Oberleitner_Schnellnberger_FinalProject
             bool conversionSuccessful = false;
             int userinput = 0;
 
+            Console.WriteLine("----Welcome to the world of gaming----");
+
             #region Login/Register
             do
             {
-                Console.WriteLine("----Welcome to the world of gaming----");
+                
                 Console.WriteLine();
                 Console.WriteLine();
                 Console.WriteLine("Press: \n \"1\" for Login \n \"2\" for Register");
@@ -39,6 +41,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                     allChosenValues.Add(userinput);
                 }
             } while (!conversionSuccessful);
+            Console.Clear();
             #endregion
 
             #region Games/Account/Credit
@@ -58,6 +61,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                     allChosenValues.Add(userinput);
                 }
             } while (!conversionSuccessful);
+            Console.Clear();
             #endregion
 
             #region Games
@@ -78,7 +82,8 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 {
                     allChosenValues.Add(userinput);
                 }
-            } while (!conversionSuccessful);           
+            } while (!conversionSuccessful);
+            Console.Clear();
             #endregion
 
             return allChosenValues.ToArray();
@@ -96,7 +101,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 if (!conversionSuccessful)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Your input is not a number \n \n Please try again");
+                    Console.WriteLine("Your input is not a number \n \nPlease try again");
                     Console.ResetColor();
                     choosennumber = -1;
                 }
