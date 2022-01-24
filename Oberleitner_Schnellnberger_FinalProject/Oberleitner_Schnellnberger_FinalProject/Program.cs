@@ -15,24 +15,32 @@ namespace Oberleitner_Schnellnberger_FinalProject
         {
             MainMenue();
         }
-        private static int[] MainMenue()
+        private static void MainMenue()
         {
             List<int> allChosenValues = new List<int>();
             bool conversionSuccessful = true;
             int userinput = 0;
-            ConsoleColor[] colors = (ConsoleColor[])ConsoleColor.GetValues(typeof(ConsoleColor));
+
+            #region WelcomeGraphics
             do
             {
-                foreach (var colour in colors)
+                ConsoleColor[] colors = (ConsoleColor[])ConsoleColor.GetValues(typeof(ConsoleColor));
+                string welcome = "Welcome to the world of gaming";
+                string enter = "Press enter and wait to get to main menu";
+                for (int i = 0; i < 3; i++)
                 {
-                    Console.Clear();
-                    Console.ForegroundColor = colour;
-                    Console.WriteLine("----Welcome to the world of gaming----");
-                    Console.WriteLine();
-                    Console.WriteLine("--Press enter to get to main menu--");
-                    Thread.Sleep(100);
-
-                }
+                    foreach (var colour in colors)
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = colour;
+                        Console.SetCursorPosition((Console.WindowWidth - welcome.Length) / 2, Console.CursorTop);
+                        Console.WriteLine(welcome);
+                        Console.WriteLine();
+                        Console.SetCursorPosition((Console.WindowWidth - enter.Length) / 2, Console.CursorTop);
+                        Console.WriteLine(enter);
+                        Thread.Sleep(20);
+                    }
+                }               
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("Press any other key to see the welcome graphics again ;)");
@@ -42,7 +50,8 @@ namespace Oberleitner_Schnellnberger_FinalProject
                     conversionSuccessful = false;
                     Console.Clear();
                 }
-            } while (conversionSuccessful);           
+            } while (conversionSuccessful);
+            #endregion
 
             #region Login/Register
             do
@@ -55,15 +64,26 @@ namespace Oberleitner_Schnellnberger_FinalProject
 
                 userinput = CheckDatasFromMainMenue();
 
-                if (userinput == -1)
+                switch (userinput)
                 {
-                    conversionSuccessful = false;
-                }
-                else
-                {
-                    allChosenValues.Add(userinput);
-                }
+                    case 1:
+                        {
+                            //Loginmethode aufrufen
+                            break;
+                        }
+                    case 2:
+                        {
+                            //Registrieren-Methode aufrufen
+                            break;
+                        }
+                    default:
+                        {
+                            conversionSuccessful = false;
+                            break;
+                        }
+                }               
             } while (!conversionSuccessful);
+
             Console.Clear();
             #endregion
 
@@ -75,15 +95,31 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 Console.WriteLine();
 
                 userinput = CheckDatasFromMainMenue();
-                if (userinput == -1)
+                switch (userinput)
                 {
-                    conversionSuccessful = false;
-                }
-                else
-                {
-                    allChosenValues.Add(userinput);
-                }
+                    case 1:
+                        {
+                            //Region Games aufrufen
+                            break;
+                        }
+                    case 2:
+                        {
+                            //Account anzeigen und evt daten ändern
+                            break;
+                        }
+                    case 3:
+                        {
+                            //Geld auflafen oder auszahlen
+                            break;
+                        }
+                    default:
+                        {
+                            conversionSuccessful = false;
+                            break;
+                        }
+                }                
             } while (!conversionSuccessful);
+
             Console.Clear();
             #endregion
 
@@ -97,19 +133,33 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 Console.WriteLine();
 
                 userinput = CheckDatasFromMainMenue();
-                if (userinput == -1)
+                switch (userinput)
                 {
-                    conversionSuccessful = false;
-                }
-                else
-                {
-                    allChosenValues.Add(userinput);
-                }
+                    case 1:
+                        {
+                            //Slotmachine starten
+                            break;
+                        }
+                    case 2:
+                        {
+                            //Shellgame starten
+                            break;
+                        }
+                    case 3:
+                        {
+                            //BlackJack starten
+                            break;
+                        }
+                    default:
+                        {
+                            conversionSuccessful = false;
+                            break;
+                        }
+                }               
             } while (!conversionSuccessful);
+
             Console.Clear();
             #endregion
-
-            return allChosenValues.ToArray();
         }
         private static int CheckDatasFromMainMenue()
         {
