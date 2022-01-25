@@ -13,7 +13,34 @@ namespace Oberleitner_Schnellnberger_FinalProject
     {
         static void Main(string[] args)
         {
+            #region Output Unicode Caracters
+            Console.OutputEncoding = System.Text.Encoding.Unicode;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\x2660"); // Pik
+            Console.WriteLine("\x2663"); // Kreuz
+            Console.WriteLine("\x2665"); // Herz
+            Console.WriteLine("\x2666"); // Karo
+            Console.WriteLine("\x24EA"); // Eingekreiste 0
+            Console.WriteLine("\x2460"); // 1
+            Console.WriteLine("\x2461"); // 2
+            Console.WriteLine("\x2462"); // 3
+            Console.WriteLine("\x2463"); // 4
+            Console.WriteLine("\x2464"); // 5
+            Console.WriteLine("\x2465"); // 6
+            Console.WriteLine("\x2466"); // 7
+            Console.WriteLine("\x2467"); // 8
+            Console.WriteLine("\x2468"); // 9
+            Console.WriteLine("\x2469"); // 10
+            Console.WriteLine("\x246A"); // 11
+            Console.WriteLine("\x246B"); // 12
+            Console.WriteLine("\x246C"); // 13
+
+            Console.ReadKey();
+            #endregion
+
             MainMenue();
+            Console.OutputEncoding = System.Text.Encoding.Unicode;
+            
         }
         private static void MainMenue()
         {
