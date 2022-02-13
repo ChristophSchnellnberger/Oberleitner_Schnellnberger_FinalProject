@@ -67,6 +67,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
             int userinput = 0;
 
             Person actualPlayer = UserLoginOrRegister(filePath, allUsers, seperator);
+            GamesAccountCredit(actualPlayer);
 
             #region Games
             do
