@@ -16,7 +16,6 @@ namespace Oberleitner_Schnellnberger_FinalProject
             threeCharCard[1] = "\x2665";
             threeCharCard[2] = "\x2666";
             string inputUser;
-            bool validInputMoney = false;
             List<int> list = new List<int>();
             double InsertOfUser=0;
             do
@@ -26,6 +25,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 Console.WriteLine("Please type \"X\" to exit");
                 inputUser = Console.ReadLine().ToLower();
                 Random random = new Random();
+                bool validInputMoney = false;
                 while (validInputMoney == false)
                 {
                     Console.WriteLine("How much money do you want to set (Format: 00.00) in §");
@@ -45,18 +45,25 @@ namespace Oberleitner_Schnellnberger_FinalProject
                         continue;
                     }
                 }
-
+                list.Clear();
                 for (int i = 0; i <= 2; i++)
                 {
-                    int value = random.Next(0, 2);
+                    int value = random.Next(2);
                     list.Add(value);
                 }
                 int[] randomValues = list.ToArray();
+
+                Console.WriteLine("______________________________");
+                Console.WriteLine("------------------------------");
 
                 foreach (var item in randomValues)
                 {
                     Console.Write(threeCharCard[item]);
                 }
+                Console.WriteLine();
+                Console.WriteLine("------------------------------");
+                Console.WriteLine("______________________________");
+
 
                 if (randomValues[0] == randomValues[1] && randomValues[1] == randomValues[2])
                 {
@@ -69,6 +76,11 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 }
             }
             while (inputUser != "x");
+
+
+
+
+
 
 
             //#region Output Unicode Caracters
