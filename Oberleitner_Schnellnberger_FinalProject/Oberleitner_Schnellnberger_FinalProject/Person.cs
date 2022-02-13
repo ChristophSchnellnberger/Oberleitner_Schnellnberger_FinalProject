@@ -202,9 +202,9 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 int error = 0;
                 try
                 {
-                    bool validInputYear = CheckBirthdayYear((value.Year).ToString());
-                    bool validInputMonth = CheckBirthdateMonth((value.Month).ToString());
-                    bool validInputDay = CheckBirthdateDay((value.Day).ToString());
+                    bool validInputYear = CheckBirthdate((value.Year).ToString(), DateTime.Now.Year-120, DateTime.Now.Year - 18);
+                    bool validInputMonth = CheckBirthdate((value.Month).ToString(),DateTime.MinValue.Month,DateTime.MaxValue.Month);
+                    bool validInputDay = CheckBirthdate((value.Day).ToString(),DateTime.MinValue.Day,DateTime.MaxValue.Day);
 
                     if (validInputYear && validInputMonth && validInputDay == true)
                     {
@@ -707,7 +707,6 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 #endregion }
             }
         }
-
         public double Credit
         {
             get
@@ -724,7 +723,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
         #endregion
 
         #region constructor
-        public Person() : this("fistName", "surname", DateTime.Today, Gender.male, "Musterstrasse", 01, 4811, "Musterstadt","Pas§word123", 0)
+        public Person() : this("fistName", "surname", DateTime.MinValue, Gender.male, "Musterstrasse", 01, 4811, "Musterstadt","Pas§word123", 0)
         {
         }
         public Person(string firstName, string surname, DateTime dateOfBirth, Gender gender, string street,
@@ -767,78 +766,37 @@ namespace Oberleitner_Schnellnberger_FinalProject
 
             return validInput;
         }
-        public static bool CheckBirthdayYear(string inputYear)
+        public static bool CheckBirthdate(string birthdate, int minValue, int maxValue)
         {
-            bool checkbirthday = false;
-            int minValue = DateTime.Now.Year - 120;
-            int maxValue = DateTime.Now.Year;
-            int yearInteger;
-            int conditionsTrue = 4;
-            int counter = 0;
+            bool conversionSuccessful = false;
 
-            if (int.TryParse(inputYear, out yearInteger))
+            int.TryParse(birthdate, out int intbirthdate);
+            do
             {
-                counter++;
-            }
-            if (inputYear.Length == 4)
-            {
-                counter++;
-            }
-            if (yearInteger > minValue)
-            {
-                counter++;
-            }
-            if (yearInteger < maxValue)
-            {
-                counter++;
-            }
-            if (conditionsTrue == counter)
-            {
-                checkbirthday = true;
-            }
-            return checkbirthday;
-        }
-        public static bool CheckBirthdateMonth(string inputMonth)
-        {
-            bool checkbirthday = false;
-            int monthInteger;
-            int conditionsTrue = 2;
-            int counter = 0;
+                #region birthdateCheck
 
-            if (int.TryParse(inputMonth, out monthInteger))
-            {
-                counter++;
-            }
-            if (inputMonth.Length == 2)
-            {
-                counter++;
-            }
-            if (conditionsTrue == counter)
-            {
-                checkbirthday = true;
-            }
-            return checkbirthday;
-        }
-        public static bool CheckBirthdateDay(string inputDay)
-        {
-            bool checkbirthday = false;
-            int dayInteger;
-            int conditionsTrue = 2;
-            int counter = 0;
+                conversionSuccessful = (birthdate).Any(char.IsLetter);
 
-            if (int.TryParse(inputDay, out dayInteger))
-            {
-                counter++;
+                if (conversionSuccessful)
+                {
+                    Console.WriteLine("Only enter integers");
+                }
+                else
+                {
+                    conversionSuccessful = true;
+                }
+
+                if (intbirthdate < minValue || intbirthdate > maxValue)
+                {
+                    Console.WriteLine("Please enter a valid date");
+                    conversionSuccessful = false;
+                    return conversionSuccessful;
+                }
+                #endregion                
             }
-            if (inputDay.Length == 2)
-            {
-                counter++;
-            }
-            if (conditionsTrue == counter)
-            {
-                checkbirthday = true;
-            }
-            return checkbirthday;
+            while (!conversionSuccessful);
+
+            return conversionSuccessful;
         }
         public static bool CheckStreet(string street)
         {

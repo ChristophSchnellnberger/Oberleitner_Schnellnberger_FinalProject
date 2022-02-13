@@ -14,16 +14,22 @@ namespace Oberleitner_Schnellnberger_FinalProject
             int error = 0;
             Person readPerson = new Person();
             List<Person> readPersons = new List<Person>();
-
+            int value = 0;
             try
             {
-                using(StreamReader reader = new StreamReader(csvString))
+                using (StreamReader reader = new StreamReader(csvString))
                 {
-                    reader.ReadLine();
+                    for (int i = value; i < 1; i++)
+                    {
+                        reader.ReadLine();
+                    }
 
-                    do
-                    {                                
-                        string[] values = csvString.Split(seperator);
+
+
+                    while (reader.Peek() == -1) 
+                    {
+                        string line = reader.ReadLine();
+                        string[] values = line.Split(seperator);
 
                         readPerson.FirstName = values[0];
                         readPerson.Surname = values[1];
@@ -33,12 +39,11 @@ namespace Oberleitner_Schnellnberger_FinalProject
                         readPerson.HouseNumber = int.Parse(values[5]);
                         readPerson.PostalCode = int.Parse(values[6]);
                         readPerson.CityName = values[7];
-                        readPerson.Credit = double.Parse(values[8]);
+                        readPerson.Password = values[8];
+                        readPerson.Credit = double.Parse(values[9]);
                         readPersons.Add(readPerson);
                     }
-                    while (reader.Peek() == -1);
                 }
-                              
             }
             #region catches
             catch (ArgumentOutOfRangeException)
@@ -110,9 +115,9 @@ namespace Oberleitner_Schnellnberger_FinalProject
             {
                 string firstLine = "first name" + seperator + "surname" + seperator + "gender" + seperator +
                                 "date of birth" + seperator + "street" + seperator + "housenumber" +
-                                seperator + "postal code" + seperator + "cityname" + seperator + "password";
-                
-                File.WriteAllText(csvString, firstLine);           
+                                seperator + "postal code" + seperator + "cityname" + seperator + "password" + seperator + "credit";
+
+                File.WriteAllText(csvString, firstLine);
             }
             #endregion
 
@@ -144,7 +149,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                             writer.Write(";");
                             writer.Write(person.PostalCode.ToString());
                             writer.Write(";");
-                            writer.Write(person.CityName); 
+                            writer.Write(person.CityName);
                             writer.Write(";");
                             writer.Write(person.Password);
                             writer.WriteLine();
@@ -219,10 +224,10 @@ namespace Oberleitner_Schnellnberger_FinalProject
 
             #endregion
         }
-        public static void StreamWriterExcelRegisteredPerson(string filePath, Person newUser,char seperator)
+        public static void StreamWriterExcelRegisteredPerson(string filePath, Person newUser, char seperator)
         {
             int error = 0;
-            
+
 
             #region Streamwriter User
             try
@@ -230,10 +235,10 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 File.AppendAllText(filePath, "\n");
                 string content = newUser.FirstName + seperator + newUser.Surname + seperator + newUser.PersonGender + seperator +
                              newUser.DateOfBirth.Date.ToString() + seperator + newUser.Street + seperator + newUser.HouseNumber.ToString() +
-                             seperator + newUser.PostalCode.ToString() + seperator + newUser.CityName + seperator + newUser.Password;
+                             seperator + newUser.PostalCode.ToString() + seperator + newUser.CityName + seperator + newUser.Password+seperator+newUser.Credit;
 
                 File.AppendAllText(filePath, content);
-            }            
+            }
             #region catches
             catch (ArgumentOutOfRangeException)
             {

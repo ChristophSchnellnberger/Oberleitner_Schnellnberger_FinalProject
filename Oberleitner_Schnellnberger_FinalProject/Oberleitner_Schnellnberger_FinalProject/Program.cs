@@ -71,6 +71,12 @@ namespace Oberleitner_Schnellnberger_FinalProject
             do
             {
                 string loginfile = "actualPlayer.csv";
+
+                if (File.Exists(loginfile))
+                {
+                    File.Delete(loginfile);
+                }
+
                 Console.WriteLine();
                 Console.WriteLine();
                 Console.WriteLine("Press: \n \"1\" for Login \n \"2\" for Register");
@@ -326,7 +332,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                             Console.Write("Please enter the year (Form: yyyy): ");
                             inputYear = Console.ReadLine();
                             Console.WriteLine();
-                            conversionSuccessful = Person.CheckBirthdayYear(inputYear);
+                            conversionSuccessful = Person.CheckBirthdate(inputYear.ToString(), DateTime.Now.Year-120, DateTime.Now.Year - 18);
 
                             if (conversionSuccessful)
                             {
@@ -342,7 +348,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                             Console.Write("Please enter the month (Form: mm): ");
                             inputMonth = Console.ReadLine();
                             Console.WriteLine();
-                            conversionSuccessful = Person.CheckBirthdateMonth(inputMonth);
+                            conversionSuccessful = Person.CheckBirthdate(inputMonth.ToString(), DateTime.MinValue.Month, DateTime.MaxValue.Month);
 
                             if (conversionSuccessful)
                             {
@@ -358,7 +364,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                             Console.Write("Please enter the day (Form: dd): ");
                             inputDay = Console.ReadLine();
                             Console.WriteLine();
-                            conversionSuccessful = Person.CheckBirthdateDay(inputDay);
+                            conversionSuccessful = Person.CheckBirthdate(inputDay.ToString(), DateTime.MinValue.Day, DateTime.MaxValue.Day);
 
                             if (conversionSuccessful)
                             {
