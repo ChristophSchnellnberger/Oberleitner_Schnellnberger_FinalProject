@@ -8,7 +8,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
 {
     internal class SlotMachine
     {
-        public static void PlayGame(Person actualPlayer)
+        public static void PlayGame(Person actualPlayer, Person[] allPlayers)
         {
             string [] threeCharCard=new string[3];
             Console.OutputEncoding = System.Text.Encoding.Unicode;
@@ -76,11 +76,10 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 }
             }
             while (inputUser != "x");
-
-
-
-
-
+            ProcessUserDatas.StreamWriterExcelRegisteredPerson("actualPlayer.csv", actualPlayer, ';');
+            int numberOfPersonInArray=Program.NumberOfPersonInArray(actualPlayer.FirstName, actualPlayer.Surname, allPlayers);
+            allPlayers[numberOfPersonInArray] = actualPlayer;
+            ProcessUserDatas.StreamWriterExcelPerson("LoginDatas.csv", allPlayers);
 
 
             //#region Output Unicode Caracters
