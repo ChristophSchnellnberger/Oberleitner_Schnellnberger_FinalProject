@@ -24,6 +24,10 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 Console.WriteLine("Please type \"P\" to confirm");
                 Console.WriteLine("Please type \"X\" to exit");
                 inputUser = Console.ReadLine().ToLower();
+                if(inputUser == "x")
+                {
+                    break;
+                }
                 Random random = new Random();
                 bool validInputMoney = false;
                 while (validInputMoney == false)
@@ -78,7 +82,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
             while (inputUser != "x");
             ProcessUserDatas.StreamWriterExcelRegisteredPerson("actualPlayer.csv", actualPlayer, ';');
             int numberOfPersonInArray=Program.NumberOfPersonInArray(actualPlayer.FirstName, actualPlayer.Surname, allPlayers);
-            allPlayers[numberOfPersonInArray] = actualPlayer;
+            allPlayers[numberOfPersonInArray].Credit = actualPlayer.Credit;
             ProcessUserDatas.StreamWriterExcelPerson("LoginDatas.csv", allPlayers);
 
 
