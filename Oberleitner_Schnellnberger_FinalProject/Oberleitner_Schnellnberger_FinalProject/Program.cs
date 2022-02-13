@@ -125,7 +125,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
 
                 Console.WriteLine();
                 Console.WriteLine();
-                Console.WriteLine("Press: \n \"1\" for Login \n \"2\" for Register");
+                Console.WriteLine("Press: \n \"1\" for Login \n \"2\" for Register\n \"3\" to play as a guest");
                 Console.WriteLine();
 
                 userinput = CheckDatasFromMainMenue();
@@ -161,6 +161,14 @@ namespace Oberleitner_Schnellnberger_FinalProject
                             conversionSuccessful = true;
                             break;
                         }
+                    case 3:
+                        {
+                            Person musterMann = new Person("fistName", "surname", DateTime.MinValue, Person.Gender.male, "Musterstrasse", 01, 4811, "Musterstadt", "Pas§word123", 0);
+                            ProcessUserDatas.StreamWriterExcelRegisteredPerson(loginfile, loggedinPerson, seperator);
+                            break;
+
+                        }
+
                     default:
                         {
                             conversionSuccessful = false;
