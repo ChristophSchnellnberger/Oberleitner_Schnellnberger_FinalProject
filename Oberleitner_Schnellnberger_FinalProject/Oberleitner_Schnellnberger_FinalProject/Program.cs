@@ -164,7 +164,8 @@ namespace Oberleitner_Schnellnberger_FinalProject
                     case 3:
                         {
                             Person musterMann = new Person("fistName", "surname", DateTime.MinValue, Person.Gender.male, "Musterstrasse", 01, 4811, "Musterstadt", "Pas§word123", 0);
-                            ProcessUserDatas.StreamWriterExcelRegisteredPerson(loginfile, loggedinPerson, seperator);
+                            ProcessUserDatas.StreamWriterExcelRegisteredPerson("actualPlayer.csv", loggedinPerson, seperator);
+                            ProcessUserDatas.StreamWriterExcelRegisteredPerson(filePath, loggedinPerson, seperator);
                             break;
 
                         }
@@ -199,7 +200,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 {
                     case 1:
                         {
-                            SlotMachine.PlayGame(actualPlayer,allUsers);
+                            SlotMachine.PlayGame(actualPlayer);
                             break;
                         }
                     case 2:

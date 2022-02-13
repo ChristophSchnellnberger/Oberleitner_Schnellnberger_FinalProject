@@ -24,9 +24,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                         reader.ReadLine();
                     }
 
-
-
-                    while (reader.Peek() == -1) 
+                    while (reader.Peek() != -1) 
                     {
                         string line = reader.ReadLine();
                         string[] values = line.Split(seperator);
@@ -152,7 +150,10 @@ namespace Oberleitner_Schnellnberger_FinalProject
                             writer.Write(person.CityName);
                             writer.Write(";");
                             writer.Write(person.Password);
+                            writer.Write(";");
+                            writer.Write(person.Credit);
                             writer.WriteLine();
+                            
                         }
                     }
                 }
@@ -232,7 +233,19 @@ namespace Oberleitner_Schnellnberger_FinalProject
             #region Streamwriter User
             try
             {
+                #region IF FILE ISNT AVAILABLE
+                if (File.Exists(filePath) == false)
+                {
+                    string firstLine = "first name" + seperator + "surname" + seperator + "gender" + seperator +
+                                    "date of birth" + seperator + "street" + seperator + "housenumber" +
+                                    seperator + "postal code" + seperator + "cityname" + seperator + "password" + seperator + "credit";
+
+                    File.WriteAllText(filePath, firstLine);
+                }
+                #endregion
+
                 File.AppendAllText(filePath, "\n");
+
                 string content = newUser.FirstName + seperator + newUser.Surname + seperator + newUser.PersonGender + seperator +
                              newUser.DateOfBirth.Date.ToString() + seperator + newUser.Street + seperator + newUser.HouseNumber.ToString() +
                              seperator + newUser.PostalCode.ToString() + seperator + newUser.CityName + seperator + newUser.Password+seperator+newUser.Credit;
@@ -303,6 +316,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
 
             Program.Exeptions(error);
             #endregion
+
 
             #endregion
         }

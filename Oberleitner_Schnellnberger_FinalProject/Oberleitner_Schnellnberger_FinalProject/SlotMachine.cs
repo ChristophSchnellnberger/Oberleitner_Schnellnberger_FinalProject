@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
 {
     internal class SlotMachine
     {
-        public static void PlayGame(Person actualPlayer, Person[] allPlayers)
+        public static void PlayGame(Person actualPlayer)
         {
             string [] threeCharCard=new string[3];
             Console.OutputEncoding = System.Text.Encoding.Unicode;
@@ -80,13 +81,15 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 }
             }
             while (inputUser != "x");
+            File.Delete("actualPlayer.csv");
             ProcessUserDatas.StreamWriterExcelRegisteredPerson("actualPlayer.csv", actualPlayer, ';');
+            Person[] allPlayers = ProcessUserDatas.ReadPersonsFromCsv("LoginDatas.csv", ';');
             int numberOfPersonInArray=Program.NumberOfPersonInArray(actualPlayer.FirstName, actualPlayer.Surname, allPlayers);
             allPlayers[numberOfPersonInArray].Credit = actualPlayer.Credit;
             ProcessUserDatas.StreamWriterExcelPerson("LoginDatas.csv", allPlayers);
 
 
-            //#region Output Unicode Caracters
+            #region Output Unicode Caracters
             //Console.OutputEncoding = System.Text.Encoding.Unicode;
             //Console.ForegroundColor = ConsoleColor.Red;
             //Console.WriteLine("\x2660"); // Pik
@@ -109,7 +112,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
             //Console.WriteLine("\x246C"); // 13
             //Console.OutputEncoding = System.Text.Encoding.Unicode;
             //Console.ReadKey();
-            //#endregion
+            #endregion
 
         }
 
