@@ -97,14 +97,6 @@ namespace Oberleitner_Schnellnberger_FinalProject
             //#endregion
 
         }
-        //member 
-        //Balance übergeben in die klasse
-        //Einarmiger Bantit
-        //Ask for input 
-        //Play gmae
-        //win or lose
-        //do you you want to play again
-        //Am schluss erst ins casino
 
 
 
