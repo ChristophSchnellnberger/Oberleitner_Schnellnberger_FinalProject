@@ -15,13 +15,8 @@ namespace Oberleitner_Schnellnberger_FinalProject
             Console.WriteLine("Welcome to the SlotMachine");
             Console.WriteLine("Please type \"P\" to confirm");
             Console.WriteLine("Please type \"X\" to exit");
-            Random randomGenerator = new Random();
             string inputUser=Console.ReadLine().ToLower();
             bool validInputMoney = false;
-            int firstRandom;
-            int secondRandom;
-            int thirdRandom;
-
             while (inputUser != "x")
             {
                 while (validInputMoney == false)
@@ -30,20 +25,6 @@ namespace Oberleitner_Schnellnberger_FinalProject
                     string userMoneySet = Console.ReadLine();
                     validInputMoney = int.TryParse(userMoneySet, out int InsertOfUser);
                 }
-
-                firstRandom = randomGenerator.Next(1, 3);
-                secondRandom = randomGenerator.Next(1, 3);
-                thirdRandom = randomGenerator.Next(1, 3);
-
-                //Symbole erzeugen 
-                //Symbole vergleichen
-
-
-
-
-
-
-
             }
             #region Output Unicode Caracters
             Console.OutputEncoding = System.Text.Encoding.Unicode;
@@ -70,11 +51,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
             Console.ReadKey();
             #endregion
 
-
         }
-       
-
-
         //member 
         //Balance übergeben in die klasse
         //Einarmiger Bantit

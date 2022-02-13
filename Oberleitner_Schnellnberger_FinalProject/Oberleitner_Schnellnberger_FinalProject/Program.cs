@@ -15,6 +15,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
         {
             #region Values
             string filePathPerson = "LoginDatas.csv";
+            string filePathCasino = "CasinoDatas.csv";
             char seperator = ';';
             #endregion
 
