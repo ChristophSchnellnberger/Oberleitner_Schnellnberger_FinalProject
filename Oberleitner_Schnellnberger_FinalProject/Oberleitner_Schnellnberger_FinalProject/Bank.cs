@@ -9,9 +9,6 @@ namespace Oberleitner_Schnellnberger_FinalProject
     internal class Bank
     {
         #region methods
-        //1. Kredit aufladen/abheben
-        //2. Zwischenspeicher
-        //3. Gewinne/Verluste/Abzug KeSt
         private static bool CheckValidData(double inputData)
         {
             bool validInput = false;

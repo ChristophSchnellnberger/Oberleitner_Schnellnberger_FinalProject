@@ -9,85 +9,45 @@ namespace Oberleitner_Schnellnberger_FinalProject
 {
     internal class SlotMachine
     {
-        public static void PlayGame(Person actualPlayer)
+        public static int[] SlotGame(Person actualPlayer)
         {
-            string [] threeCharCard=new string[3];
+            #region values
+            string[] threeCharCard = new string[3];
             Console.OutputEncoding = System.Text.Encoding.Unicode;
             threeCharCard[0] = "\x2663";
             threeCharCard[1] = "\x2665";
             threeCharCard[2] = "\x2666";
-            string inputUser;
             List<int> list = new List<int>();
-            double InsertOfUser=0;
-            do
+            double InsertOfUser = 0;
+           
+            #endregion
+
+            Random random = new Random();
+            list.Clear();
+
+            for (int i = 0; i <= 2; i++)
             {
-                Console.WriteLine("Welcome to the SlotMachine");
-                Console.WriteLine("Please type \"P\" to confirm");
-                Console.WriteLine("Please type \"X\" to exit");
-                inputUser = Console.ReadLine().ToLower();
-                if(inputUser == "x")
-                {
-                    break;
-                }
-                Random random = new Random();
-                bool validInputMoney = false;
-                while (validInputMoney == false)
-                {
-                    Console.WriteLine("How much money do you want to set (Format: 00.00) in §");
-                    string userMoneySet = Console.ReadLine();
-                    do
-                    {
-                        validInputMoney = double.TryParse(userMoneySet, out InsertOfUser);
-                    }
-                    while (validInputMoney == false);
-                    try
-                    {
-                        actualPlayer.Credit = actualPlayer.Credit - InsertOfUser;
-                    }
-                    catch
-                    {
-                        Console.WriteLine("Sorry your credit is to low!");
-                        continue;
-                    }
-                }
-                list.Clear();
-                for (int i = 0; i <= 2; i++)
-                {
-                    int value = random.Next(2);
-                    list.Add(value);
-                }
-                int[] randomValues = list.ToArray();
-
-                Console.WriteLine("______________________________");
-                Console.WriteLine("------------------------------");
-
-                foreach (var item in randomValues)
-                {
-                    Console.Write(threeCharCard[item]);
-                }
-                Console.WriteLine();
-                Console.WriteLine("------------------------------");
-                Console.WriteLine("______________________________");
-
-
-                if (randomValues[0] == randomValues[1] && randomValues[1] == randomValues[2])
-                {
-                    actualPlayer.Credit = actualPlayer.Credit + (InsertOfUser * 2);
-                    Console.WriteLine("Congratulation, you won!");
-                }
-                else
-                {
-                    Console.WriteLine("Sorry, you lose the game!");
-                }
+                int value = random.Next(2);
+                list.Add(value);
             }
-            while (inputUser != "x");
-            File.Delete("actualPlayer.csv");
-            ProcessUserDatas.StreamWriterExcelRegisteredPerson("actualPlayer.csv", actualPlayer, ';');
-            Person[] allPlayers = ProcessUserDatas.ReadPersonsFromCsv("LoginDatas.csv", ';');
-            int numberOfPersonInArray=Program.NumberOfPersonInArray(actualPlayer.FirstName, actualPlayer.Surname, allPlayers);
-            allPlayers[numberOfPersonInArray].Credit = actualPlayer.Credit;
-            ProcessUserDatas.StreamWriterExcelPerson("LoginDatas.csv", allPlayers);
+            int[] randomValues = list.ToArray();
 
+            #region CW
+            Console.WriteLine("______________________________");
+            Console.WriteLine("------------------------------");
+
+            foreach (var item in randomValues)
+            {
+                Console.Write(threeCharCard[item]);
+            }
+            Console.WriteLine();
+            Console.WriteLine("------------------------------");
+            Console.WriteLine("______________________________");
+            #endregion
+
+            #region WinOrLoose
+           
+            #endregion
 
             #region Output Unicode Caracters
             //Console.OutputEncoding = System.Text.Encoding.Unicode;
@@ -114,12 +74,8 @@ namespace Oberleitner_Schnellnberger_FinalProject
             //Console.ReadKey();
             #endregion
 
+            return list.ToArray();
+
         }
-
-
-
-
     }
-
-    
 }

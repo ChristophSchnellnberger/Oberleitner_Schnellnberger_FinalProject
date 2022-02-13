@@ -15,99 +15,58 @@ namespace Oberleitner_Schnellnberger_FinalProject
         {
             #region Values
             string filePathPerson = "LoginDatas.csv";
-            string filePathCasino = "CasinoDatas.csv";
+            string loginfile = "actualPlayer.csv";
+            bool conversionSuccessful = false;
             char seperator = ';';
             #endregion
 
             #region WelcomeGraphics
-            //#region WelcomeGraphics
-            //do
-            //{
-            //    ConsoleColor[] colors = (ConsoleColor[])ConsoleColor.GetValues(typeof(ConsoleColor));
-            //    string welcome = "Welcome to the world of gaming";
-            //    string enjoy = "Lean back and enjoy the welcome graphics";
-            //    string enter = "Press enter to get to main menu";
-            //    for (int i = 0; i < 3; i++)
-            //    {
-            //        foreach (var colour in colors)
-            //        {
-            //            Console.Clear();
-            //            Console.ForegroundColor = colour;
-            //            Console.SetCursorPosition((Console.WindowWidth - welcome.Length) / 2, Console.CursorTop);
-            //            Console.WriteLine(welcome);
-            //            Console.WriteLine();
-            //            Console.SetCursorPosition((Console.WindowWidth - enjoy.Length) / 2, Console.CursorTop);
-            //            Console.WriteLine(enjoy);
-            //            Thread.Sleep(20);
-            //        }
-            //    }               
-            //    Console.WriteLine();
-            //    Console.ForegroundColor = ConsoleColor.Magenta;
-            //    Console.SetCursorPosition((Console.WindowWidth - enter.Length) / 2, Console.CursorTop);
-            //    Console.WriteLine(enter);
-            //    Console.ResetColor();
-            //    if (Console.ReadKey(true).Key == ConsoleKey.Enter)
-            //    {
-            //        conversionSuccessful = false;
-            //        Console.Clear();
-            //    }
-            //} while (conversionSuccessful);
-            //#endregion
-
+            do
+            {
+                ConsoleColor[] colors = (ConsoleColor[])ConsoleColor.GetValues(typeof(ConsoleColor));
+                string welcome = "Welcome to the world of gaming";
+                string enjoy = "Lean back and enjoy the welcome graphics";
+                string enter = "Press enter to get to main menu";
+                for (int i = 0; i < 3; i++)
+                {
+                    foreach (var colour in colors)
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = colour;
+                        Console.SetCursorPosition((Console.WindowWidth - welcome.Length) / 2, Console.CursorTop);
+                        Console.WriteLine(welcome);
+                        Console.WriteLine();
+                        Console.SetCursorPosition((Console.WindowWidth - enjoy.Length) / 2, Console.CursorTop);
+                        Console.WriteLine(enjoy);
+                        Thread.Sleep(20);
+                    }
+                }
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.SetCursorPosition((Console.WindowWidth - enter.Length) / 2, Console.CursorTop);
+                Console.WriteLine(enter);
+                Console.ResetColor();
+                if (Console.ReadKey(true).Key == ConsoleKey.Enter)
+                {
+                    conversionSuccessful = false;
+                    Console.Clear();
+                }
+            } while (conversionSuccessful);
             #endregion
 
             #region Call Methods
             Person[] allPersonsfromCsv = ProcessUserDatas.ReadPersonsFromCsv(filePathPerson, seperator);
-            MainMenue(filePathPerson, allPersonsfromCsv, seperator);
+            MainMenue(filePathPerson, allPersonsfromCsv, seperator,loginfile);               
             #endregion
         }
-        private static void MainMenue(string filePath, Person[] allUsers, char seperator)
+        private static void MainMenue(string filePathPerson, Person[] allUsers, char seperator,string filePathUser)
         {
-            bool conversionSuccessful = true;
-            int userinput = 0;
 
-            Person actualPlayer = UserLoginOrRegister(filePath, allUsers, seperator);
-            GamesAccountCredit(actualPlayer,allUsers);
+            Person actualPlayer = UserLoginOrRegister(filePathPerson, allUsers, seperator,filePathUser);
 
-            #region Games
-            do
-            {
-                Console.WriteLine();
-                Console.WriteLine("Choose the game you want to play");
-                Console.WriteLine();
-                Console.WriteLine("Press: \n \"1\" Slot machine \n \"2\" Shell game \"3\" BlackJack");
-                Console.WriteLine();
-
-                userinput = CheckDatasFromMainMenue();
-                switch (userinput)
-                {
-                    case 1:
-                        {
-                            //Slotmachine starten
-                            break;
-                        }
-                    case 2:
-                        {
-                            //Shellgame starten
-                            break;
-                        }
-                    case 3:
-                        {
-                            //BlackJack starten
-                            break;
-                        }
-                    default:
-                        {
-                            conversionSuccessful = false;
-                            break;
-                        }
-                }
-            } while (!conversionSuccessful);
-
-            Console.Clear();
-            #endregion
+            GamesAccountCredit(actualPlayer,allUsers,filePathPerson,filePathUser);
         }
-        private static Person UserLoginOrRegister(string filePath, Person[] allUsers, char seperator)
+        private static Person UserLoginOrRegister(string filePathPerson, Person[] allUsers, char seperator,string filePathUser)
         {
             bool conversionSuccessful = true;
             int userinput = 0;
@@ -116,11 +75,11 @@ namespace Oberleitner_Schnellnberger_FinalProject
             #region Login/Register
             do
             {
-                string loginfile = "actualPlayer.csv";
+                
 
-                if (File.Exists(loginfile))
+                if (File.Exists(filePathUser))
                 {
-                    File.Delete(loginfile);
+                    File.Delete(filePathUser);
                 }
 
                 Console.WriteLine();
@@ -134,6 +93,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 {
                     case 1:
                         {
+                            Console.Clear();
                             int arrayPlace = SearchPerson(allUsers);
                             loggedinPerson = allUsers[arrayPlace];
                             do
@@ -151,21 +111,23 @@ namespace Oberleitner_Schnellnberger_FinalProject
                                 }
                             }
                             while (false);
-                            ProcessUserDatas.StreamWriterExcelRegisteredPerson(loginfile, loggedinPerson, seperator);
+                            ProcessUserDatas.StreamWriterExcelRegisteredPerson(filePathUser, loggedinPerson, seperator);
                             break;
                         }
                     case 2:
                         {
-                            loggedinPerson = AskUserForInput(filePath, seperator);
-                            ProcessUserDatas.StreamWriterExcelRegisteredPerson(loginfile, loggedinPerson, seperator);
+                            Console.Clear();
+                            loggedinPerson = AskUserForInput(filePathPerson, seperator);
+                            ProcessUserDatas.StreamWriterExcelRegisteredPerson(filePathUser, loggedinPerson, seperator);
                             conversionSuccessful = true;
                             break;
                         }
                     case 3:
                         {
+                            Console.Clear();
                             Person musterMann = new Person("fistName", "surname", DateTime.MinValue, Person.Gender.male, "Musterstrasse", 01, 4811, "Musterstadt", "Pas§word123", 0);
-                            ProcessUserDatas.StreamWriterExcelRegisteredPerson("actualPlayer.csv", loggedinPerson, seperator);
-                            ProcessUserDatas.StreamWriterExcelRegisteredPerson(filePath, loggedinPerson, seperator);
+                            ProcessUserDatas.StreamWriterExcelRegisteredPerson(filePathUser, loggedinPerson, seperator);
+                            ProcessUserDatas.StreamWriterExcelRegisteredPerson(filePathPerson, loggedinPerson, seperator);
                             break;
 
                         }
@@ -180,9 +142,10 @@ namespace Oberleitner_Schnellnberger_FinalProject
 
             Console.Clear();
             #endregion
+
             return loggedinPerson;
         }
-        private static void GamesAccountCredit(Person actualPlayer,Person[] allUsers)
+        private static void GamesAccountCredit(Person actualPlayer,Person[] allUsers,string filePathPerson,string filePathUser)
         {
             int userinput;
             bool conversionSuccessful = false;
@@ -191,7 +154,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
             do
             {
                 Console.WriteLine();
-                Console.WriteLine("Press: \n \"1\" Play games \n \"2\" Show your Account \n \"3\" Top out your credit \n \"4\" Pay out your credit");
+                Console.WriteLine("Press: \n \"1\" Play games \n \"2\" Show your Account \n \"3\" Top up your credit \n \"4\" Pay out your credit");
                 Console.WriteLine();
 
                 userinput = CheckDatasFromMainMenue();
@@ -200,7 +163,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 {
                     case 1:
                         {
-                            SlotMachine.PlayGame(actualPlayer);
+                            Casino.ChoosenGame(actualPlayer,filePathPerson,filePathUser);
                             break;
                         }
                     case 2:
@@ -1011,7 +974,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 Console.WriteLine(actualUser.HouseNumber);
                 Console.WriteLine(actualUser.PostalCode);
                 Console.WriteLine(actualUser.CityName);
-                if (actualUser.Credit < 0)
+                if (actualUser.Credit > 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
@@ -1025,6 +988,5 @@ namespace Oberleitner_Schnellnberger_FinalProject
 
 
         }
-
     }
 }

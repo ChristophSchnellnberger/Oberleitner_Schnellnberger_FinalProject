@@ -123,10 +123,25 @@ namespace Oberleitner_Schnellnberger_FinalProject
         }
         public static void StreamWriterExcelPerson(string filePath, Person[] allUser)
         {
+            char seperator = ';';
             int error = 0;
             #region Streamwriter User
             try
             {
+                #region IF FILE ISNT AVAILABLE
+                if (File.Exists(filePath) == false)
+                {
+                    string firstLine = "first name" + seperator + "surname" + seperator + "gender" + seperator +
+                                    "date of birth" + seperator + "street" + seperator + "housenumber" +
+                                    seperator + "postal code" + seperator + "cityname" + seperator + "password" + seperator + "credit";
+
+                    File.WriteAllText(filePath, firstLine);
+                }
+                #endregion
+
+                File.AppendAllText(filePath, "\n");
+
+
                 using (StreamWriter writer = new StreamWriter(filePath))
                 {
                     foreach (var person in allUser)
@@ -228,8 +243,6 @@ namespace Oberleitner_Schnellnberger_FinalProject
         public static void StreamWriterExcelRegisteredPerson(string filePath, Person newUser, char seperator)
         {
             int error = 0;
-
-
             #region Streamwriter User
             try
             {
