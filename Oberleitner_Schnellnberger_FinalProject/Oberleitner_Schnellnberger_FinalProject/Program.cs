@@ -80,8 +80,8 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 {
                     case 1:
                         {
-
-                            SearchPerson(allUsers);
+                            int arrayPlace = SearchPerson(allUsers);
+                            Person loggedinPerson = allUsers[arrayPlace];
                             break;
                         }
                     case 2:
