@@ -33,7 +33,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                         readPerson.HouseNumber = int.Parse(values[5]);
                         readPerson.PostalCode = int.Parse(values[6]);
                         readPerson.CityName = values[7];
-
+                        readPerson.Credit = double.Parse(values[8]);
                         readPersons.Add(readPerson);
                     }
                     while (reader.Peek() == -1);

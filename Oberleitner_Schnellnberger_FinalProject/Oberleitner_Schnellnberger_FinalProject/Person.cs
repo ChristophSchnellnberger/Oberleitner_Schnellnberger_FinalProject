@@ -19,6 +19,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
         private int _postalCode;
         private string _cityName;
         private string _password;
+        private double _credit;
         #endregion
 
         #region properties
@@ -706,14 +707,28 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 #endregion }
             }
         }
+
+        public double Credit
+        {
+            get
+            {
+                return _credit;
+            }
+            set
+            {
+                _credit = value;
+            }
+
+        }
+     
         #endregion
 
         #region constructor
-        public Person() : this("fistName", "surname", DateTime.Today, Gender.male, "Musterstrasse", 01, 4811, "Musterstadt","Pas§word123")
+        public Person() : this("fistName", "surname", DateTime.Today, Gender.male, "Musterstrasse", 01, 4811, "Musterstadt","Pas§word123", 0)
         {
         }
         public Person(string firstName, string surname, DateTime dateOfBirth, Gender gender, string street,
-                      int houseNumber, int postalCode, string cityName,string password)
+                      int houseNumber, int postalCode, string cityName,string password, double credit)
         {
             FirstName = firstName;
             Surname = surname;
@@ -724,6 +739,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
             PostalCode = postalCode;
             CityName = cityName;
             Password = password;
+            Credit = credit;
         }
         #endregion
 

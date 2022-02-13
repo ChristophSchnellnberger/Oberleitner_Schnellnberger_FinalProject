@@ -19,18 +19,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
             char seperator = ';';
             #endregion
 
-            #region Call Methods
-            Person[] allPersonsfromCsv = ProcessUserDatas.ReadPersonsFromCsv(filePathPerson, seperator);
-            MainMenue(filePathPerson,allPersonsfromCsv,seperator);
-            #endregion
-        }
-
-        private static void MainMenue(string filePath,Person[]allUsers,char seperator)
-        {
-            List<int> allChosenValues = new List<int>();
-            bool conversionSuccessful = true;
-            int userinput = 0;
-
+            #region WelcomeGraphics
             //#region WelcomeGraphics
             //do
             //{
@@ -65,10 +54,23 @@ namespace Oberleitner_Schnellnberger_FinalProject
             //} while (conversionSuccessful);
             //#endregion
 
+            #endregion
+
+            #region Call Methods
+            Person[] allPersonsfromCsv = ProcessUserDatas.ReadPersonsFromCsv(filePathPerson, seperator);
+            MainMenue(filePathPerson,allPersonsfromCsv,seperator);
+            #endregion
+        }
+
+        private static void MainMenue(string filePath,Person[]allUsers,char seperator)
+        {
+            bool conversionSuccessful = true;
+            int userinput = 0;
+
             #region Login/Register
             do
             {
-                
+                string loginfile = "actualPlayer.csv";
                 Console.WriteLine();
                 Console.WriteLine();
                 Console.WriteLine("Press: \n \"1\" for Login \n \"2\" for Register");
@@ -82,11 +84,28 @@ namespace Oberleitner_Schnellnberger_FinalProject
                         {
                             int arrayPlace = SearchPerson(allUsers);
                             Person loggedinPerson = allUsers[arrayPlace];
+                            do
+                            {
+                                bool loginSucessfull = false;
+                                loginSucessfull = Login(loggedinPerson);
+                                if (loginSucessfull==false)
+                                {
+                                    loginSucessfull=CancelInformation();
+                                    if(loginSucessfull==true)
+                                    {
+                                        conversionSuccessful = false;
+                                        break;
+                                    }
+                                }
+                            }
+                            while (false);
+                            ProcessUserDatas.StreamWriterExcelRegisteredPerson(loginfile, loggedinPerson, seperator);
                             break;
                         }
                     case 2:
                         {
-                            AskUserForInput(filePath,seperator);
+                            Person loggedinPerson = AskUserForInput(filePath,seperator);
+                            ProcessUserDatas.StreamWriterExcelRegisteredPerson(loginfile, loggedinPerson, seperator);
                             conversionSuccessful = true;
                             break;
                         }
@@ -174,6 +193,43 @@ namespace Oberleitner_Schnellnberger_FinalProject
 
             Console.Clear();
             #endregion
+        }
+        private static bool CancelInformation()
+        {
+            string userInput;
+            do
+            {
+                Console.WriteLine("Do you want to try again?");
+                Console.WriteLine("If yes, type \"y\" ; if not type \"n\" ");
+                userInput = Console.ReadLine();
+                if (userInput.ToLower().Trim() == "y")
+                {
+                    return false;
+                }
+                if (userInput.ToLower().Trim() == "n")
+                {
+                    return true;
+                }
+            }
+            while (userInput != "n" && userInput != "y");
+            return false;
+        }
+        private static bool Login(Person user)
+        {
+            int counter = 3;
+            for (int i = 0; i < 3; i++)
+            {
+                Console.WriteLine("You can try it "+ counter + " times");
+                Console.Write("Please enter your password: ");
+                string password = Console.ReadLine();
+                if (password == user.Password)
+                {
+                    return true;
+                }
+                counter--;
+            }
+            return false;
+
         }
         private static int CheckDatasFromMainMenue()
         {
@@ -416,7 +472,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
 
                     try
                     {
-                        newUser = new Person(firstName, surname, birthdate, gender, street, houseNumber, postalCode, cityName, password);
+                        newUser = new Person(firstName, surname, birthdate, gender, street, houseNumber, postalCode, cityName, password, 0);
                         createNewUser = true;
                         ProcessUserDatas.StreamWriterExcelRegisteredPerson(filePath,newUser,seperator);
                     }
