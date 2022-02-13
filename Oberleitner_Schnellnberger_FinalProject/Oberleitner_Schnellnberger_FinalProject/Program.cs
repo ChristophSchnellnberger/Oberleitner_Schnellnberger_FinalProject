@@ -61,7 +61,6 @@ namespace Oberleitner_Schnellnberger_FinalProject
             MainMenue(filePathPerson,allPersonsfromCsv,seperator);
             #endregion
         }
-
         private static void MainMenue(string filePath,Person[]allUsers,char seperator)
         {
             bool conversionSuccessful = true;
