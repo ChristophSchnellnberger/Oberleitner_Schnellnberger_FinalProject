@@ -48,6 +48,7 @@
     <Compile Include="Casino.cs" />
     <Compile Include="GameAnalysis.cs" />
     <Compile Include="GraphicElements.cs" />
+    <Compile Include="Person.cs" />
     <Compile Include="ProcessUserDatas.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
