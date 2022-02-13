@@ -8,57 +8,69 @@ namespace Oberleitner_Schnellnberger_FinalProject
 {
     internal class SlotMachine
     {
-        private double InsertOfUser { get; set; }
-
-        public static void PlayGame(Bank user, Bank casino, Person actualPlayer)
+        public static void PlayGame(Person actualPlayer)
         {
             string [] threeCharCard=new string[3];
             Console.OutputEncoding = System.Text.Encoding.Unicode;
             threeCharCard[0] = "\x2663";
             threeCharCard[1] = "\x2665";
             threeCharCard[2] = "\x2666";
-            
-
-            Console.WriteLine("Welcome to the SlotMachine");
-            Console.WriteLine("Please type \"P\" to confirm");
-            Console.WriteLine("Please type \"X\" to exit");
-            string inputUser=Console.ReadLine().ToLower();
+            string inputUser;
             bool validInputMoney = false;
             List<int> list = new List<int>();
-            while (inputUser != "x")
+            double InsertOfUser=0;
+            do
             {
+                Console.WriteLine("Welcome to the SlotMachine");
+                Console.WriteLine("Please type \"P\" to confirm");
+                Console.WriteLine("Please type \"X\" to exit");
+                inputUser = Console.ReadLine().ToLower();
                 Random random = new Random();
                 while (validInputMoney == false)
                 {
                     Console.WriteLine("How much money do you want to set (Format: 00.00) in §");
                     string userMoneySet = Console.ReadLine();
-                    validInputMoney = int.TryParse(userMoneySet, out int InsertOfUser);
-
+                    do
+                    {
+                        validInputMoney = double.TryParse(userMoneySet, out InsertOfUser);
+                    }
+                    while (validInputMoney == false);
+                    try
+                    {
+                        actualPlayer.Credit = actualPlayer.Credit - InsertOfUser;
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Sorry your credit is to low!");
+                        continue;
+                    }
                 }
 
                 for (int i = 0; i <= 2; i++)
                 {
-                    int value =random.Next(0, 2);
+                    int value = random.Next(0, 2);
                     list.Add(value);
                 }
-                int[] randomValues=list.ToArray();
+                int[] randomValues = list.ToArray();
 
                 foreach (var item in randomValues)
                 {
                     Console.Write(threeCharCard[item]);
                 }
 
-                if (randomValues[0]== randomValues[1] && randomValues[1]==randomValues[2])
+                if (randomValues[0] == randomValues[1] && randomValues[1] == randomValues[2])
                 {
+                    actualPlayer.Credit = actualPlayer.Credit + (InsertOfUser * 2);
                     Console.WriteLine("Congratulation, you won!");
                 }
                 else
                 {
                     Console.WriteLine("Sorry, you lose the game!");
                 }
-
-
             }
+            while (inputUser != "x");
+
+
             //#region Output Unicode Caracters
             //Console.OutputEncoding = System.Text.Encoding.Unicode;
             //Console.ForegroundColor = ConsoleColor.Red;
