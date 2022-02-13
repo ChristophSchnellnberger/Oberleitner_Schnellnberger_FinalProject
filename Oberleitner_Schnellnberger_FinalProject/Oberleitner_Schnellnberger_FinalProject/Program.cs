@@ -58,108 +58,15 @@ namespace Oberleitner_Schnellnberger_FinalProject
 
             #region Call Methods
             Person[] allPersonsfromCsv = ProcessUserDatas.ReadPersonsFromCsv(filePathPerson, seperator);
-            MainMenue(filePathPerson,allPersonsfromCsv,seperator);
+            MainMenue(filePathPerson, allPersonsfromCsv, seperator);
             #endregion
         }
-        private static void MainMenue(string filePath,Person[]allUsers,char seperator)
+        private static void MainMenue(string filePath, Person[] allUsers, char seperator)
         {
             bool conversionSuccessful = true;
             int userinput = 0;
 
-            #region Login/Register
-            do
-            {
-                string loginfile = "actualPlayer.csv";
-
-                if (File.Exists(loginfile))
-                {
-                    File.Delete(loginfile);
-                }
-
-                Console.WriteLine();
-                Console.WriteLine();
-                Console.WriteLine("Press: \n \"1\" for Login \n \"2\" for Register");
-                Console.WriteLine();
-
-                userinput = CheckDatasFromMainMenue();
-
-                switch (userinput)
-                {
-                    case 1:
-                        {
-                            int arrayPlace = SearchPerson(allUsers);
-                            Person loggedinPerson = allUsers[arrayPlace];
-                            do
-                            {
-                                bool loginSucessfull = false;
-                                loginSucessfull = Login(loggedinPerson);
-                                if (loginSucessfull==false)
-                                {
-                                    loginSucessfull=CancelInformation();
-                                    if(loginSucessfull==true)
-                                    {
-                                        conversionSuccessful = false;
-                                        break;
-                                    }
-                                }
-                            }
-                            while (false);
-                            ProcessUserDatas.StreamWriterExcelRegisteredPerson(loginfile, loggedinPerson, seperator);
-                            break;
-                        }
-                    case 2:
-                        {
-                            Person loggedinPerson = AskUserForInput(filePath,seperator);
-                            ProcessUserDatas.StreamWriterExcelRegisteredPerson(loginfile, loggedinPerson, seperator);
-                            conversionSuccessful = true;
-                            break;
-                        }
-                    default:
-                        {
-                            conversionSuccessful = false;
-                            break;
-                        }
-                }               
-            } while (!conversionSuccessful);
-
-            Console.Clear();
-            #endregion
-
-            #region Games/Account/Credit
-            do
-            {
-                Console.WriteLine();
-                Console.WriteLine("Press: \n \"1\" Play games \n \"2\" Your Account \n \"3\" Top out/pay out your credit");
-                Console.WriteLine();
-
-                userinput = CheckDatasFromMainMenue();
-                switch (userinput)
-                {
-                    case 1:
-                        {
-                            //Region Games aufrufen
-                            break;
-                        }
-                    case 2:
-                        {
-                            //Account anzeigen und evt daten ändern
-                            break;
-                        }
-                    case 3:
-                        {
-                            //Geld auflafen oder auszahlen
-                            break;
-                        }
-                    default:
-                        {
-                            conversionSuccessful = false;
-                            break;
-                        }
-                }                
-            } while (!conversionSuccessful);
-
-            Console.Clear();
-            #endregion
+            Person actualPlayer = UserLoginOrRegister(filePath, allUsers, seperator);
 
             #region Games
             do
@@ -193,11 +100,122 @@ namespace Oberleitner_Schnellnberger_FinalProject
                             conversionSuccessful = false;
                             break;
                         }
-                }               
+                }
             } while (!conversionSuccessful);
 
             Console.Clear();
             #endregion
+        }
+
+        private static Person UserLoginOrRegister(string filePath, Person[] allUsers, char seperator)
+        {
+            bool conversionSuccessful = true;
+            int userinput = 0;
+            Person loggedinPerson = new Person();
+
+            #region Login/Register
+            do
+            {
+                string loginfile = "actualPlayer.csv";
+
+                if (File.Exists(loginfile))
+                {
+                    File.Delete(loginfile);
+                }
+
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("Press: \n \"1\" for Login \n \"2\" for Register");
+                Console.WriteLine();
+
+                userinput = CheckDatasFromMainMenue();
+
+                switch (userinput)
+                {
+                    case 1:
+                        {
+                            int arrayPlace = SearchPerson(allUsers);
+                            loggedinPerson = allUsers[arrayPlace];
+                            do
+                            {
+                                bool loginSucessfull = false;
+                                loginSucessfull = Login(loggedinPerson);
+                                if (loginSucessfull == false)
+                                {
+                                    loginSucessfull = CancelInformation();
+                                    if (loginSucessfull == true)
+                                    {
+                                        conversionSuccessful = false;
+                                        break;
+                                    }
+                                }
+                            }
+                            while (false);
+                            ProcessUserDatas.StreamWriterExcelRegisteredPerson(loginfile, loggedinPerson, seperator);
+                            break;
+                        }
+                    case 2:
+                        {
+                            loggedinPerson = AskUserForInput(filePath, seperator);
+                            ProcessUserDatas.StreamWriterExcelRegisteredPerson(loginfile, loggedinPerson, seperator);
+                            conversionSuccessful = true;
+                            break;
+                        }
+                    default:
+                        {
+                            conversionSuccessful = false;
+                            break;
+                        }
+                }
+            } while (!conversionSuccessful);
+
+            Console.Clear();
+            #endregion
+            return loggedinPerson;
+        }
+        private static void GamesAccountCredit(Person actualPlayer)
+        {
+            int userinput;
+            bool conversionSuccessful = false;
+
+            #region Games/Account/Credit
+            do
+            {
+                Console.WriteLine();
+                Console.WriteLine("Press: \n \"1\" Play games \n \"2\" Show your Account \n \"3\" Top out/pay out your credit");
+                Console.WriteLine();
+
+                userinput = CheckDatasFromMainMenue();
+
+                switch (userinput)
+                {
+                    case 1:
+                        {
+                            SlotMachine.PlayGame(actualPlayer);
+                            break;
+                        }
+                    case 2:
+                        {
+                            PrintPerson(actualPlayer);
+
+                            break;
+                        }
+                    case 3:
+                        {
+                            //Geld auflafen oder auszahlen
+                            break;
+                        }
+                    default:
+                        {
+                            conversionSuccessful = false;
+                            break;
+                        }
+                }
+            } while (!conversionSuccessful);
+
+            Console.Clear();
+            #endregion
+
         }
         private static bool CancelInformation()
         {
@@ -224,7 +242,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
             int counter = 3;
             for (int i = 0; i < 3; i++)
             {
-                Console.WriteLine("You can try it "+ counter + " times");
+                Console.WriteLine("You can try it " + counter + " times");
                 Console.Write("Please enter your password: ");
                 string password = Console.ReadLine();
                 if (password == user.Password)
@@ -260,12 +278,12 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 int error = GetErrorCodeFromExeption(ex);
                 Program.PrintErrorMessage(error);
             }
-            
+
             #endregion
 
             return choosennumber;
         }
-        private static Person AskUserForInput(string filePath,char seperator)
+        private static Person AskUserForInput(string filePath, char seperator)
         {
             #region values
             int error = 0;
@@ -331,7 +349,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                             Console.Write("Please enter the year (Form: yyyy): ");
                             inputYear = Console.ReadLine();
                             Console.WriteLine();
-                            conversionSuccessful = Person.CheckBirthdate(inputYear.ToString(), DateTime.Now.Year-120, DateTime.Now.Year - 18);
+                            conversionSuccessful = Person.CheckBirthdate(inputYear.ToString(), DateTime.Now.Year - 120, DateTime.Now.Year - 18);
 
                             if (conversionSuccessful)
                             {
@@ -479,7 +497,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                     {
                         newUser = new Person(firstName, surname, birthdate, gender, street, houseNumber, postalCode, cityName, password, 0);
                         createNewUser = true;
-                        ProcessUserDatas.StreamWriterExcelRegisteredPerson(filePath,newUser,seperator);
+                        ProcessUserDatas.StreamWriterExcelRegisteredPerson(filePath, newUser, seperator);
                     }
                     catch
                     {
@@ -638,7 +656,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
             #endregion
         }
         private static int GetErrorCodeFromExeption(Exception exception)
-        {            
+        {
             if (exception is ArgumentNullException)
             {
                 return 1;
@@ -655,7 +673,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
             {
                 return 9;
             }
-            
+
             if (exception is OverflowException)
             {
                 return 10;
@@ -938,6 +956,35 @@ namespace Oberleitner_Schnellnberger_FinalProject
             placeOfPerson = -1;
 
             return placeOfPerson;
+        }
+        public static void PrintPerson(Person actualUser)
+        {
+
+            {
+                Console.WriteLine();
+                Console.WriteLine("Here is the Data of the Person you look for");
+                Console.WriteLine();
+                Console.WriteLine(actualUser.FirstName);
+                Console.WriteLine(actualUser.Surname);
+                Console.WriteLine(actualUser.DateOfBirth);
+                Console.WriteLine(actualUser.PersonGender);
+                Console.WriteLine(actualUser.Street);
+                Console.WriteLine(actualUser.HouseNumber);
+                Console.WriteLine(actualUser.PostalCode);
+                Console.WriteLine(actualUser.CityName);
+                if (actualUser.Credit < 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                else { Console.ForegroundColor = ConsoleColor.Red; }
+
+                Console.WriteLine(actualUser.Credit);
+
+                Console.ResetColor();
+            }
+
+
+
         }
 
     }
