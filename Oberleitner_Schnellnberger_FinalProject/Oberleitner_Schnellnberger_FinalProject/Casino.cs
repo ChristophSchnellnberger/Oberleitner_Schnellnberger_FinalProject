@@ -11,11 +11,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
 
         public static void NewMain()
         {
-            Bank casino = new Bank();
-            Bank.ChargeBalance(casino, 1);
 
-            Bank user = new Bank();
-            Bank.ChargeBalance(user, 2);
         }
     }
 }

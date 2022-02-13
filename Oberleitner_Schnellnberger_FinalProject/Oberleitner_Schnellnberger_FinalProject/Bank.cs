@@ -8,48 +8,6 @@ namespace Oberleitner_Schnellnberger_FinalProject
 {
     internal class Bank
     {
-        #region private members
-        //Kontostand=balance!
-        private double _balance;
-        #endregion
-
-        #region public properties
-        public double Balance
-        {
-            get
-            {
-                return _balance;
-            }
-            set
-            {
-                //Check MinMax
-                bool correctInput = CheckValidData(value);
-                if (correctInput == true)
-                {
-                    _balance = value;
-                }
-                else
-                {
-                    int error = 15;
-                    Program.PrintErrorMessage(error);
-                }
-            }
-        }
-        #endregion
-
-        #region constructor
-        public Bank (double balance)
-        {
-            Balance=balance;
-        }
-
-        public Bank()
-            //Default Constructor (Welcome Bonus 10€)
-        {
-            Balance = 10;
-        }
-        #endregion
-
         #region methods
         //1. Kredit aufladen/abheben
         //2. Zwischenspeicher
@@ -73,27 +31,30 @@ namespace Oberleitner_Schnellnberger_FinalProject
             }
             return validInput;
         }
-
-        public static void ChargeBalance(Bank bank, double inputData)
+        public static void ChargeBalance(Person bank, double inputData)
         {
             if(CheckValidData(inputData)==true)
             {
-                bank.Balance = bank.Balance + inputData;
+                if(inputData > 0)
+                {
+                    bank.Credit = bank.Credit + inputData;
+                }
+              
             }
             else
             {
                 int error = 15;
                 Program.PrintErrorMessage(error);
             }
-
-
         }
-
-        public static void ReduceBalance(Bank bank, double inputData)
+        public static void ReduceBalance(Person bank, double inputData)
         {
             if (CheckValidData(inputData) == true)
             {
-                bank.Balance = bank.Balance - inputData;
+                if(bank.Credit >= inputData)
+                {
+                    bank.Credit = bank.Credit - inputData;
+                }               
             }
             else
             {
@@ -101,11 +62,6 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 Program.PrintErrorMessage(error);
             }
         }
-
-       
-
-        
-
         #endregion
 
     }

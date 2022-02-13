@@ -67,7 +67,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
             int userinput = 0;
 
             Person actualPlayer = UserLoginOrRegister(filePath, allUsers, seperator);
-            GamesAccountCredit(actualPlayer);
+            GamesAccountCredit(actualPlayer,allUsers);
 
             #region Games
             do
@@ -107,7 +107,6 @@ namespace Oberleitner_Schnellnberger_FinalProject
             Console.Clear();
             #endregion
         }
-
         private static Person UserLoginOrRegister(string filePath, Person[] allUsers, char seperator)
         {
             bool conversionSuccessful = true;
@@ -174,7 +173,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
             #endregion
             return loggedinPerson;
         }
-        private static void GamesAccountCredit(Person actualPlayer)
+        private static void GamesAccountCredit(Person actualPlayer,Person[] allUsers)
         {
             int userinput;
             bool conversionSuccessful = false;
@@ -183,7 +182,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
             do
             {
                 Console.WriteLine();
-                Console.WriteLine("Press: \n \"1\" Play games \n \"2\" Show your Account \n \"3\" Top out/pay out your credit");
+                Console.WriteLine("Press: \n \"1\" Play games \n \"2\" Show your Account \n \"3\" Top out your credit \n \"4\" Pay out your credit");
                 Console.WriteLine();
 
                 userinput = CheckDatasFromMainMenue();
@@ -192,7 +191,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 {
                     case 1:
                         {
-                            SlotMachine.PlayGame(actualPlayer);
+                            SlotMachine.PlayGame(actualPlayer,allUsers);
                             break;
                         }
                     case 2:
@@ -203,7 +202,37 @@ namespace Oberleitner_Schnellnberger_FinalProject
                         }
                     case 3:
                         {
-                            //Geld auflafen oder auszahlen
+                            double inputData;
+                            do
+                            {
+                                Console.Write("Please type in how much money you want to load up: ");
+                                bool conSuc = double.TryParse(Console.ReadLine(),out inputData);
+                                if (!conSuc)
+                                {
+                                    Console.WriteLine("Please enter a valid integer >0 and <100");
+                                }
+                            }
+                            while (false);
+                           
+                            Bank.ChargeBalance(actualPlayer,inputData);
+                            break;
+                        }
+                    case 4:
+                        {
+                            double inputData;
+                            do
+                            {
+                                Console.Write("Please type in how much money you want to load out: ");
+                                bool conSuc = double.TryParse(Console.ReadLine(), out inputData);
+                                if (!conSuc)
+                                {
+                                    Console.WriteLine("Please enter a valid integer >0 and <100");
+                                }
+                            }
+                            while (false);
+
+                            Bank.ReduceBalance(actualPlayer, inputData);
+
                             break;
                         }
                     default:
