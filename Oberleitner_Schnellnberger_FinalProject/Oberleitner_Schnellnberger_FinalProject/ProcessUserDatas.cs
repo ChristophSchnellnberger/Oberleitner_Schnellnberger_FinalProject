@@ -19,10 +19,10 @@ namespace Oberleitner_Schnellnberger_FinalProject
             {
                 using(StreamReader reader = new StreamReader(csvString))
                 {
-                    do
-                    {
-                        reader.ReadLine();
+                    reader.ReadLine();
 
+                    do
+                    {                                
                         string[] values = csvString.Split(seperator);
 
                         readPerson.FirstName = values[0];
@@ -112,9 +112,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                                 "date of birth" + seperator + "street" + seperator + "housenumber" +
                                 seperator + "postal code" + seperator + "cityname" + seperator + "password";
                 
-                File.WriteAllText(csvString, firstLine);
-                ReadPersonsFromCsv(csvString, seperator);
-
+                File.WriteAllText(csvString, firstLine);           
             }
             #endregion
 
@@ -229,6 +227,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
             #region Streamwriter User
             try
             {
+                File.AppendAllText(filePath, "\n");
                 string content = newUser.FirstName + seperator + newUser.Surname + seperator + newUser.PersonGender + seperator +
                              newUser.DateOfBirth.Date.ToString() + seperator + newUser.Street + seperator + newUser.HouseNumber.ToString() +
                              seperator + newUser.PostalCode.ToString() + seperator + newUser.CityName + seperator + newUser.Password;

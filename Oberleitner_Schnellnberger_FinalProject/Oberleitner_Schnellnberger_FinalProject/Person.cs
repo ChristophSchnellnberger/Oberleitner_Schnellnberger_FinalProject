@@ -709,7 +709,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
         #endregion
 
         #region constructor
-        public Person() : this("fistName", "surname", DateTime.MinValue, Gender.male, "Musterstrasse", 01, 4811, "Musterstadt","Pas§word123")
+        public Person() : this("fistName", "surname", DateTime.Today, Gender.male, "Musterstrasse", 01, 4811, "Musterstadt","Pas§word123")
         {
         }
         public Person(string firstName, string surname, DateTime dateOfBirth, Gender gender, string street,

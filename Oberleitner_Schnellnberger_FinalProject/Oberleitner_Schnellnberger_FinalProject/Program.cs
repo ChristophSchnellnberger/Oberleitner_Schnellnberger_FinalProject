@@ -31,39 +31,39 @@ namespace Oberleitner_Schnellnberger_FinalProject
             bool conversionSuccessful = true;
             int userinput = 0;
 
-            #region WelcomeGraphics
-            do
-            {
-                ConsoleColor[] colors = (ConsoleColor[])ConsoleColor.GetValues(typeof(ConsoleColor));
-                string welcome = "Welcome to the world of gaming";
-                string enjoy = "Lean back and enjoy the welcome graphics";
-                string enter = "Press enter to get to main menu";
-                for (int i = 0; i < 3; i++)
-                {
-                    foreach (var colour in colors)
-                    {
-                        Console.Clear();
-                        Console.ForegroundColor = colour;
-                        Console.SetCursorPosition((Console.WindowWidth - welcome.Length) / 2, Console.CursorTop);
-                        Console.WriteLine(welcome);
-                        Console.WriteLine();
-                        Console.SetCursorPosition((Console.WindowWidth - enjoy.Length) / 2, Console.CursorTop);
-                        Console.WriteLine(enjoy);
-                        Thread.Sleep(20);
-                    }
-                }               
-                Console.WriteLine();
-                Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.SetCursorPosition((Console.WindowWidth - enter.Length) / 2, Console.CursorTop);
-                Console.WriteLine(enter);
-                Console.ResetColor();
-                if (Console.ReadKey(true).Key == ConsoleKey.Enter)
-                {
-                    conversionSuccessful = false;
-                    Console.Clear();
-                }
-            } while (conversionSuccessful);
-            #endregion
+            //#region WelcomeGraphics
+            //do
+            //{
+            //    ConsoleColor[] colors = (ConsoleColor[])ConsoleColor.GetValues(typeof(ConsoleColor));
+            //    string welcome = "Welcome to the world of gaming";
+            //    string enjoy = "Lean back and enjoy the welcome graphics";
+            //    string enter = "Press enter to get to main menu";
+            //    for (int i = 0; i < 3; i++)
+            //    {
+            //        foreach (var colour in colors)
+            //        {
+            //            Console.Clear();
+            //            Console.ForegroundColor = colour;
+            //            Console.SetCursorPosition((Console.WindowWidth - welcome.Length) / 2, Console.CursorTop);
+            //            Console.WriteLine(welcome);
+            //            Console.WriteLine();
+            //            Console.SetCursorPosition((Console.WindowWidth - enjoy.Length) / 2, Console.CursorTop);
+            //            Console.WriteLine(enjoy);
+            //            Thread.Sleep(20);
+            //        }
+            //    }               
+            //    Console.WriteLine();
+            //    Console.ForegroundColor = ConsoleColor.Magenta;
+            //    Console.SetCursorPosition((Console.WindowWidth - enter.Length) / 2, Console.CursorTop);
+            //    Console.WriteLine(enter);
+            //    Console.ResetColor();
+            //    if (Console.ReadKey(true).Key == ConsoleKey.Enter)
+            //    {
+            //        conversionSuccessful = false;
+            //        Console.Clear();
+            //    }
+            //} while (conversionSuccessful);
+            //#endregion
 
             #region Login/Register
             do
