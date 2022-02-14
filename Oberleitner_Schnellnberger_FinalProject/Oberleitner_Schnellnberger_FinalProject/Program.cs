@@ -105,6 +105,10 @@ namespace Oberleitner_Schnellnberger_FinalProject
                             Console.Clear();
                             int arrayPlace = ProcessUserDatas.SearchPerson(allUsers);
                             loggedinPerson = allUsers[arrayPlace];
+                            if (arrayPlace == -1)
+                            {
+                                break;
+                            }
                             do
                             {                              
                                 bool loginSucessfull = ProcessUserDatas.Login(loggedinPerson);
@@ -679,9 +683,6 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 Console.WriteLine("The argument is out of range");
             }
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine();
-            Console.WriteLine("Press enter for further actions");
-            Console.ReadKey();
             #endregion
         }
     }

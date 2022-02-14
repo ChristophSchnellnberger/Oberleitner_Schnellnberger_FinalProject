@@ -502,7 +502,6 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 Program.Exeptions(error);
                 #endregion
             }
-            while (placeInArray == -1);
 
             return placeInArray;
         }
@@ -572,13 +571,20 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 string choosenValue = Console.ReadLine();
                 choosenValue = choosenValue.ToLower();
                 choosenValue = choosenValue.Trim();
-                int value = 0;
+                int value;
                 userinput = Program.CheckDatasFromMainMenue(choosenValue);
 
                 switch (userinput)
                 {
                     case 1:
                         {
+                            do
+                            {
+                                Console.WriteLine("Choose the gam you want to play: \n 1) Slotmachine \n2) Shellgame");
+                                int.TryParse(Console.ReadLine(), out value);
+                            }
+                            while (false);
+                            
                             Casino.ChoosenGame(actualPlayer, filePathPerson, filePathUser, value);
                             break;
                         }
@@ -587,6 +593,8 @@ namespace Oberleitner_Schnellnberger_FinalProject
                             ProcessUserDatas.PrintPerson(actualPlayer);
                             break;
                         }
+
+                    #region Load up money
                     case 3:
                         {
                             double inputData;
@@ -605,12 +613,15 @@ namespace Oberleitner_Schnellnberger_FinalProject
                             Bank.ChargeBalance(actualPlayer, inputData);
                             break;
                         }
+                    #endregion
+
+                    #region Pay out money
                     case 4:
                         {
                             double inputData;
                             do
                             {
-                                Console.Write("Please type in how much money you want to load out: ");
+                                Console.Write("Please type in how much money you want to pay out: ");
                                 bool conSuc = double.TryParse(Console.ReadLine(), out inputData);
                                 if (!conSuc)
                                 {
@@ -623,6 +634,8 @@ namespace Oberleitner_Schnellnberger_FinalProject
 
                             break;
                         }
+                    #endregion
+
                     default:
                         {
                             conversionSuccessful = false;
