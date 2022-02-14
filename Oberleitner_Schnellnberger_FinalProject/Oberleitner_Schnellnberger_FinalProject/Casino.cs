@@ -92,6 +92,8 @@ namespace Oberleitner_Schnellnberger_FinalProject
             ProcessUserDatas.StreamWriterExcelRegisteredPerson(filePathUser, actualPlayer, ';');
             Person[] allPlayers = ProcessUserDatas.ReadPersonsFromCsv(filePathPerson, ';');
             int numberOfPersonInArray = Program.NumberOfPersonInArray(actualPlayer.FirstName, actualPlayer.Surname, allPlayers);
+            
+            
             allPlayers[numberOfPersonInArray].Credit = actualPlayer.Credit;
             ProcessUserDatas.StreamWriterExcelPerson(filePathPerson, allPlayers);
         }
