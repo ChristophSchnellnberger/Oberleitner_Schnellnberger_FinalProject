@@ -9,7 +9,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
 {
     internal class SlotMachine
     {
-        public static int[] SlotGame(Person actualPlayer)
+        public static bool SlotGame(Person actualPlayer)
         {
             #region values
             string[] threeCharCard = new string[3];
@@ -19,6 +19,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
             threeCharCard[2] = "\x2666";
             List<int> list = new List<int>();
             double InsertOfUser = 0;
+            bool userWin;
            
             #endregion
 
@@ -46,7 +47,16 @@ namespace Oberleitner_Schnellnberger_FinalProject
             #endregion
 
             #region WinOrLoose
-           
+            if (randomValues[0] == randomValues[1] && randomValues[1] == randomValues[2])
+            {
+                userWin = true;
+            }
+            else
+            {
+                userWin=false;
+            }
+            return userWin;
+
             #endregion
 
             #region Output Unicode Caracters
@@ -74,7 +84,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
             //Console.ReadKey();
             #endregion
 
-            return list.ToArray();
+
 
         }
     }
