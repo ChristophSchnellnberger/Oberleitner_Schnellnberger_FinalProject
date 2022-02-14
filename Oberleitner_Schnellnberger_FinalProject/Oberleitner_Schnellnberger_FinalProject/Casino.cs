@@ -10,7 +10,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
     internal class Casino
     {
 
-        public static void ChoosenGame(Person actualPlayer,string filePathPerson,string filePathUser)
+        public static void Dealer(Person actualPlayer,string filePathPerson,string filePathUser, int choosenGame)
         {
             #region values
             string[] threeCharCard = new string[3];

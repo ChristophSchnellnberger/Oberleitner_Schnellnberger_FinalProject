@@ -171,6 +171,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 string choosenValue = Console.ReadLine();
                 choosenValue = choosenValue.ToLower();
                 choosenValue = choosenValue.Trim();
+                int choosenGame=1;
 
                 userinput = CheckDatasFromMainMenue(choosenValue);
 
@@ -178,7 +179,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 {
                     case 1:
                         {
-                            Casino.ChoosenGame(actualPlayer, filePathPerson, filePathUser);
+                            Casino.Dealer(actualPlayer, filePathPerson, filePathUser, choosenGame);
                             break;
                         }
                     case 2:
