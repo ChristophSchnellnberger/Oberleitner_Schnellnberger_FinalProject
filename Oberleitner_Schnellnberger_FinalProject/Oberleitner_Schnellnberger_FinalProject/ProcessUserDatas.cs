@@ -547,7 +547,10 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 {
                     Console.ForegroundColor = ConsoleColor.Gray;
                 }
-                else { Console.ForegroundColor = ConsoleColor.Red; }
+                if(actualUser.Credit <0) 
+                { 
+                    Console.ForegroundColor = ConsoleColor.Red; 
+                }
                 #endregion
 
                 Console.WriteLine(actualUser.Credit);
