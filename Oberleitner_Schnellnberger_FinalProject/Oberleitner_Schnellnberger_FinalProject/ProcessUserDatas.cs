@@ -416,8 +416,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
         {
             int error = 0;
             int placeInArray = 0;
-            do
-            {
+            
                 try
                 {
                     Console.Clear();
@@ -500,8 +499,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 }
 
                 Program.Exeptions(error);
-                #endregion
-            }
+                #endregion           
 
             return placeInArray;
         }
