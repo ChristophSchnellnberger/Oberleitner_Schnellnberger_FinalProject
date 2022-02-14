@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Oberleitner_Schnellnberger_FinalProject
@@ -16,25 +17,49 @@ namespace Oberleitner_Schnellnberger_FinalProject
             Console.OutputEncoding = System.Text.Encoding.Unicode;
             threeCharCard[0] = "\x2666";
             threeCharCard[1] = "\x2666";
-            threeCharCard[2] = "\x24EA";
+            threeCharCard[2] = "\x2665";
             int[] randomValues=new int[3];
             Random random = new Random();
-            list.Clear();
-
-            for (int i = 0; i < randomValues.Length; i++)
+            for (int i = 0; i < 10; i++)
             {
-                int value = random.Next(3);
-                if (list.Contains(value))
+                list.Clear();
+                for (int j = 0; j < randomValues.Length; j++)
                 {
-                    i--;
-                    continue;
+                    int value = random.Next(3);
+                    if (list.Contains(value))
+                    {
+                        j--;
+                        continue;
+                    }
+                    else
+                    {
+                        list.Add(value);
+                    }
                 }
-                else
+                randomValues = list.ToArray();
+                int k = 3;
+                Console.Clear();
+                foreach (var item in randomValues)
                 {
-                    list.Add(value);
+                    Console.SetCursorPosition((Console.WindowWidth - k) / 2, Console.CursorTop);
+                    Console.Write(threeCharCard[item]);
+                    k=k-2;
                 }
+                Thread.Sleep(500);
+                Console.Clear();
+                Console.SetCursorPosition((Console.WindowWidth - 3) / 2, Console.CursorTop);
+                Console.Write("\x2666" + "\x2666" + "\x2666");
             }
-            randomValues = list.ToArray();
+            Console.WriteLine("At which kind of place do you think is the heart? (1,2 or 3)");
+            do
+            {
+                int.TryParse(Console.ReadLine(),out int choosenValue);
+            }while (false);
+
+           
+
+
+         
 
 
             return userWin;
