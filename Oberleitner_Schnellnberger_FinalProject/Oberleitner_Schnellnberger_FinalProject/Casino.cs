@@ -10,7 +10,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
     internal class Casino
     {
 
-        public static void Dealer(Person actualPlayer,string filePathPerson,string filePathUser, int choosenGame)
+        public static void ChoosenGame(Person actualPlayer,string filePathPerson,string filePathUser)
         {
             #region values
             string[] threeCharCard = new string[3];
@@ -25,6 +25,9 @@ namespace Oberleitner_Schnellnberger_FinalProject
             bool userWin=false;
             string game = "Slot Game";
             #endregion
+<<<<<<< HEAD
+
+=======
            
             if (choosenGame==1)
             {
@@ -34,6 +37,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
             {
                 game = "Shell Game";
             }     
+>>>>>>> 6b12ac829aec39000c32f76c69af3b423708e596
             do
             {
                 Console.WriteLine("Welcome to the " + game );
@@ -107,7 +111,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
             File.Delete(filePathUser);
             ProcessUserDatas.StreamWriterExcelRegisteredPerson(filePathUser, actualPlayer, ';');
             Person[] allPlayers = ProcessUserDatas.ReadPersonsFromCsv(filePathPerson, ';');
-            int numberOfPersonInArray = Program.NumberOfPersonInArray(actualPlayer.FirstName, actualPlayer.Surname, allPlayers);
+            int numberOfPersonInArray = ProcessUserDatas.NumberOfPersonInArray(actualPlayer.FirstName, actualPlayer.Surname, allPlayers);
             
             
             allPlayers[numberOfPersonInArray].Credit = actualPlayer.Credit;

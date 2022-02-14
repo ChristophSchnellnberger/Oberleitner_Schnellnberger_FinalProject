@@ -329,6 +329,330 @@ namespace Oberleitner_Schnellnberger_FinalProject
 
             #endregion
         }
+        public static string firstCharToUpper(string value)
+        {
+            int error = 0;
+            string first = value;
+
+            try
+            {
+                char firstChar = value.First();
+                first = firstChar.ToString();
+                first = first.ToUpper();
+                firstChar = first.First();
+                char[] array = new char[value.Length];
+                array = value.ToCharArray();
+                array[0] = firstChar;
+                value = String.Concat(array);
+            }
+            #region catches
+            catch (ArgumentOutOfRangeException)
+            {
+                error = 15;
+            }
+            catch (ArgumentNullException)
+            {
+                error = 1;
+            }
+            catch (ArgumentException)
+            {
+                error = 2;
+            }
+            catch (OutOfMemoryException)
+            {
+                error = 14;
+            }
+            catch (FormatException)
+            {
+                error = 9;
+            }
+            catch (OverflowException)
+            {
+                error = 10;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                error = 11;
+            }
+            catch (NotSupportedException)
+            {
+                error = 12;
+            }
+            catch (DirectoryNotFoundException)
+            {
+                error = 3;
+            }
+            catch (PathTooLongException)
+            {
+                error = 4;
+            }
+            catch (UnauthorizedAccessException)
+            {
+                error = 5;
+            }
+            catch (System.Security.SecurityException)
+            {
+                error = 13;
+            }
+            catch (FileNotFoundException)
+            {
+                error = 6;
+            }
+            catch (IOException)
+            {
+                error = 7;
+            }
+            catch (Exception)
+            {
+                error = 8;
+            }
+
+            Program.Exeptions(error);
+            #endregion
+
+            return value;
+        }
+        public static int SearchPerson(Person[] allPersons)
+        {
+            int error = 0;
+            int placeInArray = 0;
+            do
+            {
+                try
+                {
+                    Console.Clear();
+                    Console.WriteLine("Please type in your first Name!");
+                    string inputFirstName = Console.ReadLine();
+                    inputFirstName = firstCharToUpper(inputFirstName);
+                    Console.WriteLine("Please type in your surname");
+                    string inputSurname = Console.ReadLine();
+                    inputSurname = firstCharToUpper(inputSurname);
+
+                    placeInArray = NumberOfPersonInArray(inputFirstName, inputSurname, allPersons);
+
+                    if (placeInArray == -1)
+                    {
+                        Console.WriteLine("This name cannot be found");
+                        Console.WriteLine("Please try again or register a new person");
+                        Console.ReadKey();
+                    }
+                }
+                #region catches
+                catch (ArgumentOutOfRangeException)
+                {
+                    error = 15;
+                }
+                catch (ArgumentNullException)
+                {
+                    error = 1;
+                }
+                catch (ArgumentException)
+                {
+                    error = 2;
+                }
+                catch (OutOfMemoryException)
+                {
+                    error = 14;
+                }
+                catch (FormatException)
+                {
+                    error = 9;
+                }
+                catch (OverflowException)
+                {
+                    error = 10;
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    error = 11;
+                }
+                catch (NotSupportedException)
+                {
+                    error = 12;
+                }
+                catch (DirectoryNotFoundException)
+                {
+                    error = 3;
+                }
+                catch (PathTooLongException)
+                {
+                    error = 4;
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    error = 5;
+                }
+                catch (System.Security.SecurityException)
+                {
+                    error = 13;
+                }
+                catch (FileNotFoundException)
+                {
+                    error = 6;
+                }
+                catch (IOException)
+                {
+                    error = 7;
+                }
+                catch (Exception)
+                {
+                    error = 8;
+                }
+
+                Program.Exeptions(error);
+                #endregion
+            }
+            while (placeInArray == -1);
+
+            return placeInArray;
+        }
+        public static int NumberOfPersonInArray(string personToLookForFirstName, string personToLookForSurname, Person[] allUser)
+        {
+            int placeOfPerson;
+
+            for (placeOfPerson = 0; placeOfPerson < allUser.Length; placeOfPerson++)
+            {
+                if (allUser[placeOfPerson] != null)
+                {
+                    Person currentPerson = allUser[placeOfPerson];
+
+                    if (personToLookForFirstName == currentPerson.FirstName && personToLookForSurname == currentPerson.Surname)
+                    {
+                        return placeOfPerson;
+                    }
+                }
+            }
+            placeOfPerson = -1;
+
+            return placeOfPerson;
+        }
+        public static void PrintPerson(Person actualUser)
+        {
+            {
+                Console.WriteLine();
+                Console.WriteLine("Here is the Data of the Person you look for");
+                Console.WriteLine();
+                Console.WriteLine(actualUser.FirstName);
+                Console.WriteLine(actualUser.Surname);
+                Console.WriteLine(actualUser.DateOfBirth);
+                Console.WriteLine(actualUser.PersonGender);
+                Console.WriteLine(actualUser.Street);
+                Console.WriteLine(actualUser.HouseNumber);
+                Console.WriteLine(actualUser.PostalCode);
+                Console.WriteLine(actualUser.CityName);
+
+                #region color of text
+                if (actualUser.Credit > 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                if (actualUser.Credit == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                }
+                else { Console.ForegroundColor = ConsoleColor.Red; }
+                #endregion
+
+                Console.WriteLine(actualUser.Credit);
+
+                Console.ResetColor();
+            }
+        }
+        public static void GamesAccountCredit(Person actualPlayer, Person[] allUsers, string filePathPerson, string filePathUser)
+        {
+            int userinput;
+            bool conversionSuccessful = false;
+
+            #region Games/Account/Credit
+            do
+            {
+                Console.WriteLine();
+                Console.WriteLine("Press: \n \"1\" Play games \n \"2\" Show your Account \n \"3\" Top up your credit \n \"4\" Pay out your credit");
+                Console.WriteLine();
+                string choosenValue = Console.ReadLine();
+                choosenValue = choosenValue.ToLower();
+                choosenValue = choosenValue.Trim();
+
+                userinput = Program.CheckDatasFromMainMenue(choosenValue);
+
+                switch (userinput)
+                {
+                    case 1:
+                        {
+                            Casino.ChoosenGame(actualPlayer, filePathPerson, filePathUser);
+                            break;
+                        }
+                    case 2:
+                        {
+                            ProcessUserDatas.PrintPerson(actualPlayer);
+                            break;
+                        }
+                    case 3:
+                        {
+                            double inputData;
+                            do
+                            {
+                                Console.Write("Please type in how much money you want to load up: ");
+                                bool conversionSuccessfull = double.TryParse(Console.ReadLine(), out inputData);
+
+                                if (!conversionSuccessfull)
+                                {
+                                    Console.WriteLine("Please enter a valid integer >0 and <1000");
+                                }
+                            }
+                            while (false);
+
+                            Bank.ChargeBalance(actualPlayer, inputData);
+                            break;
+                        }
+                    case 4:
+                        {
+                            double inputData;
+                            do
+                            {
+                                Console.Write("Please type in how much money you want to load out: ");
+                                bool conSuc = double.TryParse(Console.ReadLine(), out inputData);
+                                if (!conSuc)
+                                {
+                                    Console.WriteLine("Please enter a valid integer >0 and <100");
+                                }
+                            }
+                            while (false);
+
+                            Bank.ReduceBalance(actualPlayer, inputData);
+
+                            break;
+                        }
+                    default:
+                        {
+                            conversionSuccessful = false;
+                            break;
+                        }
+                }
+            } while (!conversionSuccessful);
+
+            Console.Clear();
+            #endregion
+
+        }
+        public static bool Login(Person user)
+        {
+            int counter = 3;
+
+            for (int i = 0; i < 3; i++)
+            {
+                Console.WriteLine("You can try it " + counter + " times");
+                Console.Write("Please enter your password: ");
+                string password = Console.ReadLine();
+                if (password == user.Password)
+                {
+                    return true;
+                }
+                counter--;
+            }
+            return false;
+        }
+
 
     }
 }
