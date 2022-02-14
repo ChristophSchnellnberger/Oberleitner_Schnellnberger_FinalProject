@@ -25,7 +25,15 @@ namespace Oberleitner_Schnellnberger_FinalProject
             bool userWin;
 
             #endregion
+            switch (choosenGame)
+            {
+                case (1):
+                    {
+                        break;
+                    }
+            }
 
+                    
             do
             {
                 Console.WriteLine("Welcome to the SlotMachine");
