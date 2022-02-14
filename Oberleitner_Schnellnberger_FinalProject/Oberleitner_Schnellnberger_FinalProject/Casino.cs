@@ -22,6 +22,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
             List<int> list = new List<int>();
             double InsertOfUser = 0;
             bool validInputMoney = false;
+            bool userWin;
 
             #endregion
 
@@ -58,9 +59,9 @@ namespace Oberleitner_Schnellnberger_FinalProject
                     if (actualPlayer.Credit - InsertOfUser >= 0)
                     {
                         actualPlayer.Credit = actualPlayer.Credit - InsertOfUser;
-                        int[] randomValues = SlotMachine.SlotGame(actualPlayer);
+                        userWin = SlotMachine.SlotGame(actualPlayer);
 
-                        if (randomValues[0] == randomValues[1] && randomValues[1] == randomValues[2])
+                        if (userWin==true)
                         {
                             actualPlayer.Credit = actualPlayer.Credit + (InsertOfUser * 2);
                             Console.WriteLine("Congratulation, you won!");
@@ -91,6 +92,8 @@ namespace Oberleitner_Schnellnberger_FinalProject
             ProcessUserDatas.StreamWriterExcelRegisteredPerson(filePathUser, actualPlayer, ';');
             Person[] allPlayers = ProcessUserDatas.ReadPersonsFromCsv(filePathPerson, ';');
             int numberOfPersonInArray = Program.NumberOfPersonInArray(actualPlayer.FirstName, actualPlayer.Surname, allPlayers);
+            
+            
             allPlayers[numberOfPersonInArray].Credit = actualPlayer.Credit;
             ProcessUserDatas.StreamWriterExcelPerson(filePathPerson, allPlayers);
         }
