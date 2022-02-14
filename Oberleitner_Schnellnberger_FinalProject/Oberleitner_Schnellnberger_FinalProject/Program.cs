@@ -56,17 +56,17 @@ namespace Oberleitner_Schnellnberger_FinalProject
 
             #region Call Methods
             Person[] allPersonsfromCsv = ProcessUserDatas.ReadPersonsFromCsv(filePathPerson, seperator);
-            MainMenue(filePathPerson, allPersonsfromCsv, seperator,loginfile);               
+            MainMenue(filePathPerson, allPersonsfromCsv, seperator, loginfile);
             #endregion
         }
-        private static void MainMenue(string filePathPerson, Person[] allUsers, char seperator,string filePathUser)
+        private static void MainMenue(string filePathPerson, Person[] allUsers, char seperator, string filePathUser)
         {
 
-            Person actualPlayer = UserLoginOrRegister(filePathPerson, allUsers, seperator,filePathUser);
+            Person actualPlayer = UserLoginOrRegister(filePathPerson, allUsers, seperator, filePathUser);
 
-            GamesAccountCredit(actualPlayer,allUsers,filePathPerson,filePathUser);
+            GamesAccountCredit(actualPlayer, allUsers, filePathPerson, filePathUser);
         }
-        private static Person UserLoginOrRegister(string filePathPerson, Person[] allUsers, char seperator,string filePathUser)
+        private static Person UserLoginOrRegister(string filePathPerson, Person[] allUsers, char seperator, string filePathUser)
         {
             bool conversionSuccessful = true;
             int userinput = 0;
@@ -75,22 +75,26 @@ namespace Oberleitner_Schnellnberger_FinalProject
             #region Login/Register
             do
             {
-                
-
                 if (File.Exists(filePathUser))
                 {
                     File.Delete(filePathUser);
                 }
 
+                #region User interaction
                 Console.WriteLine();
                 Console.WriteLine();
                 Console.WriteLine("Press: \n \"1\" for Login \n \"2\" for Register\n \"3\" to play as a guest");
                 Console.WriteLine();
+                string choosenValue = Console.ReadLine();
+                choosenValue = choosenValue.ToLower();
+                choosenValue = choosenValue.Trim();
+                #endregion
 
-                userinput = CheckDatasFromMainMenue();
+                userinput = CheckDatasFromMainMenue(choosenValue);
 
                 switch (userinput)
                 {
+                    #region Case Login
                     case 1:
                         {
                             Console.Clear();
@@ -114,6 +118,9 @@ namespace Oberleitner_Schnellnberger_FinalProject
                             ProcessUserDatas.StreamWriterExcelRegisteredPerson(filePathUser, loggedinPerson, seperator);
                             break;
                         }
+                    #endregion
+
+                    #region Case Register
                     case 2:
                         {
                             Console.Clear();
@@ -122,6 +129,9 @@ namespace Oberleitner_Schnellnberger_FinalProject
                             conversionSuccessful = true;
                             break;
                         }
+                    #endregion
+
+                    #region Case Register as a guest
                     case 3:
                         {
                             Console.Clear();
@@ -131,6 +141,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                             break;
 
                         }
+                    #endregion
 
                     default:
                         {
@@ -138,14 +149,15 @@ namespace Oberleitner_Schnellnberger_FinalProject
                             break;
                         }
                 }
-            } while (!conversionSuccessful);
+            } 
+            while (!conversionSuccessful);
 
             Console.Clear();
             #endregion
 
             return loggedinPerson;
         }
-        private static void GamesAccountCredit(Person actualPlayer,Person[] allUsers,string filePathPerson,string filePathUser)
+        private static void GamesAccountCredit(Person actualPlayer, Person[] allUsers, string filePathPerson, string filePathUser)
         {
             int userinput;
             bool conversionSuccessful = false;
@@ -156,20 +168,22 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 Console.WriteLine();
                 Console.WriteLine("Press: \n \"1\" Play games \n \"2\" Show your Account \n \"3\" Top up your credit \n \"4\" Pay out your credit");
                 Console.WriteLine();
+                string choosenValue = Console.ReadLine();
+                choosenValue = choosenValue.ToLower();
+                choosenValue = choosenValue.Trim();
 
-                userinput = CheckDatasFromMainMenue();
+                userinput = CheckDatasFromMainMenue(choosenValue);
 
                 switch (userinput)
                 {
                     case 1:
                         {
-                            Casino.ChoosenGame(actualPlayer,filePathPerson,filePathUser);
+                            Casino.ChoosenGame(actualPlayer, filePathPerson, filePathUser);
                             break;
                         }
                     case 2:
                         {
                             PrintPerson(actualPlayer);
-
                             break;
                         }
                     case 3:
@@ -178,15 +192,16 @@ namespace Oberleitner_Schnellnberger_FinalProject
                             do
                             {
                                 Console.Write("Please type in how much money you want to load up: ");
-                                bool conSuc = double.TryParse(Console.ReadLine(),out inputData);
-                                if (!conSuc)
+                                bool conversionSuccessfull = double.TryParse(Console.ReadLine(), out inputData);
+
+                                if (!conversionSuccessfull)
                                 {
-                                    Console.WriteLine("Please enter a valid integer >0 and <100");
+                                    Console.WriteLine("Please enter a valid integer >0 and <1000");
                                 }
                             }
                             while (false);
-                           
-                            Bank.ChargeBalance(actualPlayer,inputData);
+
+                            Bank.ChargeBalance(actualPlayer, inputData);
                             break;
                         }
                     case 4:
@@ -227,6 +242,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 Console.WriteLine("Do you want to try again?");
                 Console.WriteLine("If yes, type \"y\" ; if not type \"n\" ");
                 userInput = Console.ReadLine();
+
                 if (userInput.ToLower().Trim() == "y")
                 {
                     return false;
@@ -235,13 +251,16 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 {
                     return true;
                 }
+                Console.Clear();
             }
             while (userInput != "n" && userInput != "y");
+
             return false;
         }
         private static bool Login(Person user)
         {
             int counter = 3;
+
             for (int i = 0; i < 3; i++)
             {
                 Console.WriteLine("You can try it " + counter + " times");
@@ -254,34 +273,19 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 counter--;
             }
             return false;
-
         }
-        private static int CheckDatasFromMainMenue()
+        private static int CheckDatasFromMainMenue(string userinput)
         {
             int choosennumber = 0;
 
-            try
+            bool conversionSuccessful = int.TryParse(userinput, out choosennumber);
+            if (!conversionSuccessful)
             {
-                string userinput = Console.ReadLine();
-                userinput = userinput.ToLower();
-                userinput = userinput.Trim();
-                bool conversionSuccessful = int.TryParse(userinput, out choosennumber);
-                if (!conversionSuccessful)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Your input is not a number \n \nPlease try again");
-                    Console.ResetColor();
-                    choosennumber = -1;
-                }
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Your input is not a number \n \nPlease try again");
+                Console.ResetColor();
+                choosennumber = -1;
             }
-            #region catches
-            catch (Exception ex)
-            {
-                int error = GetErrorCodeFromExeption(ex);
-                Program.PrintErrorMessage(error);
-            }
-
-            #endregion
 
             return choosennumber;
         }
@@ -289,14 +293,14 @@ namespace Oberleitner_Schnellnberger_FinalProject
         {
             #region values
             int error = 0;
-            string surname = default;
-            string firstName = default;
+            string surname;
+            string firstName;
             DateTime birthdate = default;
-            string street = default;
-            int houseNumber = default;
-            int postalCode = default;
-            string cityName = default;
-            string password = default;
+            string street;
+            int houseNumber;
+            int postalCode;
+            string cityName;
+            string password;
             Person.Gender gender = 0;
             bool createNewUser;
             bool conversionSuccessful = false;
@@ -451,7 +455,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                     #region Postal Code
                     do
                     {
-                        Console.Write("Please enter your postal code ");
+                        Console.Write("Please enter your postal code: ");
                         string postalCodeInput = Console.ReadLine();
                         Console.WriteLine();
                         conversionSuccessful = int.TryParse(postalCodeInput, out postalCode);
@@ -699,9 +703,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 Console.WriteLine("Sorry, an exeption case has happened");
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.DarkRed;
-            }
-
-
+            }          
             if (errorCode == 1)
             {
                 Console.WriteLine("The argument is null or empty");
@@ -763,12 +765,16 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 Console.WriteLine("The argument is out of range");
             }
             Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine();
+            Console.WriteLine("Press enter for further actions");
+            Console.ReadKey();
             #endregion
         }
         public static string firstCharToUpper(string value)
         {
             int error = 0;
             string first = value;
+
             try
             {
                 char firstChar = value.First();
@@ -855,6 +861,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
             {
                 try
                 {
+                    Console.Clear();
                     Console.WriteLine("Please type in your first Name!");
                     string inputFirstName = Console.ReadLine();
                     inputFirstName = firstCharToUpper(inputFirstName);
@@ -863,10 +870,12 @@ namespace Oberleitner_Schnellnberger_FinalProject
                     inputSurname = firstCharToUpper(inputSurname);
 
                     placeInArray = NumberOfPersonInArray(inputFirstName, inputSurname, allPersons);
+
                     if (placeInArray == -1)
                     {
                         Console.WriteLine("This name cannot be found");
                         Console.WriteLine("Please try again or register a new person");
+                        Console.ReadKey();
                     }
                 }
                 #region catches
@@ -934,8 +943,8 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 Program.Exeptions(error);
                 #endregion
             }
-
             while (placeInArray == -1);
+
             return placeInArray;
         }
         public static int NumberOfPersonInArray(string personToLookForFirstName, string personToLookForSurname, Person[] allUser)
@@ -947,12 +956,11 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 if (allUser[placeOfPerson] != null)
                 {
                     Person currentPerson = allUser[placeOfPerson];
+
                     if (personToLookForFirstName == currentPerson.FirstName && personToLookForSurname == currentPerson.Surname)
                     {
                         return placeOfPerson;
                     }
-
-
                 }
             }
             placeOfPerson = -1;
@@ -961,7 +969,6 @@ namespace Oberleitner_Schnellnberger_FinalProject
         }
         public static void PrintPerson(Person actualUser)
         {
-
             {
                 Console.WriteLine();
                 Console.WriteLine("Here is the Data of the Person you look for");
@@ -974,19 +981,23 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 Console.WriteLine(actualUser.HouseNumber);
                 Console.WriteLine(actualUser.PostalCode);
                 Console.WriteLine(actualUser.CityName);
+
+                #region color of text
                 if (actualUser.Credit > 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
+                if (actualUser.Credit == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                }
                 else { Console.ForegroundColor = ConsoleColor.Red; }
+                #endregion
 
                 Console.WriteLine(actualUser.Credit);
 
                 Console.ResetColor();
             }
-
-
-
         }
     }
 }

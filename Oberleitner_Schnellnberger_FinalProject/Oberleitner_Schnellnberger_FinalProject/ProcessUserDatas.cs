@@ -234,8 +234,6 @@ namespace Oberleitner_Schnellnberger_FinalProject
             {
                 error = 8;
             }
-
-            Program.Exeptions(error);
             #endregion
 
             #endregion
@@ -326,8 +324,6 @@ namespace Oberleitner_Schnellnberger_FinalProject
             {
                 error = 8;
             }
-
-            Program.Exeptions(error);
             #endregion
 
 
