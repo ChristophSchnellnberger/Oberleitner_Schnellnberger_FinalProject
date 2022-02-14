@@ -23,11 +23,11 @@ namespace Oberleitner_Schnellnberger_FinalProject
 
             for (int i = 0; i < randomValues.Length; i++)
             {
-                int value = random.Next(2);
+                int value = random.Next(3);
                 if (list.Contains(value))
                 {
-                    continue;
                     i--;
+                    continue;
                 }
                 else
                 {
