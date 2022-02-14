@@ -18,7 +18,6 @@ namespace Oberleitner_Schnellnberger_FinalProject
             threeCharCard[1] = "\x2665";
             threeCharCard[2] = "\x2666";
             List<int> list = new List<int>();
-            double InsertOfUser = 0;
             bool userWin;
            
             #endregion
