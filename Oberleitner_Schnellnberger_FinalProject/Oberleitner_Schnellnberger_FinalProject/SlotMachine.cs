@@ -27,7 +27,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
 
             for (int i = 0; i <= 2; i++)
             {
-                int value = random.Next(2);
+                int value = random.Next(3);
                 list.Add(value);
             }
             int[] randomValues = list.ToArray();
