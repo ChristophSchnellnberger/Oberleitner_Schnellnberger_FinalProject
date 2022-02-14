@@ -564,7 +564,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
             do
             {
                 Console.WriteLine();
-                Console.WriteLine("Press: \n \"1\" Play games \n \"2\" Show your Account \n \"3\" Top up your credit \n \"4\" Pay out your credit");
+                Console.WriteLine("Press: \n \"1\" Play games \n \"2\" Show your Account \n \"3\" Top up your credit \n \"4\" Pay out your credit\n \"5\" To Quit");
                 Console.WriteLine();
                 string choosenValue = Console.ReadLine();
                 choosenValue = choosenValue.ToLower();
@@ -633,6 +633,12 @@ namespace Oberleitner_Schnellnberger_FinalProject
                             break;
                         }
                     #endregion
+
+                    case 5:
+                        {
+                            System.Environment.Exit(0);
+                            break;
+                        }
 
                     default:
                         {

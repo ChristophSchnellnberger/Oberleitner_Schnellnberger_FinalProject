@@ -104,11 +104,13 @@ namespace Oberleitner_Schnellnberger_FinalProject
                         {
                             Console.Clear();
                             int arrayPlace = ProcessUserDatas.SearchPerson(allUsers);
-                            loggedinPerson = allUsers[arrayPlace];
                             if (arrayPlace == -1)
                             {
+                                conversionSuccessful = false;
                                 break;
                             }
+                            loggedinPerson = allUsers[arrayPlace];
+                            
                             do
                             {                              
                                 bool loginSucessfull = ProcessUserDatas.Login(loggedinPerson);
