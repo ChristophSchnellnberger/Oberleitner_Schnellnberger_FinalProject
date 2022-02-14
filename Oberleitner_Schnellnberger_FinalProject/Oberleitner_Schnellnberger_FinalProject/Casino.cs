@@ -10,7 +10,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
     internal class Casino
     {
 
-        public static void ChoosenGame(Person actualPlayer,string filePathPerson,string filePathUser)
+        public static void ChoosenGame(Person actualPlayer,string filePathPerson,string filePathUser,int choosenGame)
         {
             #region values
             string[] threeCharCard = new string[3];
@@ -25,9 +25,9 @@ namespace Oberleitner_Schnellnberger_FinalProject
             bool userWin=false;
             string game = "Slot Game";
             #endregion
-<<<<<<< HEAD
 
-=======
+
+
            
             if (choosenGame==1)
             {
@@ -37,7 +37,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
             {
                 game = "Shell Game";
             }     
->>>>>>> 6b12ac829aec39000c32f76c69af3b423708e596
+
             do
             {
                 Console.WriteLine("Welcome to the " + game );

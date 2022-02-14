@@ -572,14 +572,14 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 string choosenValue = Console.ReadLine();
                 choosenValue = choosenValue.ToLower();
                 choosenValue = choosenValue.Trim();
-
+                int value = 0;
                 userinput = Program.CheckDatasFromMainMenue(choosenValue);
 
                 switch (userinput)
                 {
                     case 1:
                         {
-                            Casino.ChoosenGame(actualPlayer, filePathPerson, filePathUser);
+                            Casino.ChoosenGame(actualPlayer, filePathPerson, filePathUser, value);
                             break;
                         }
                     case 2:
