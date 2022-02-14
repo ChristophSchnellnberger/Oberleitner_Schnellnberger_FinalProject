@@ -50,6 +50,7 @@
     <Compile Include="ProcessUserDatas.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShellMaschine.cs" />
     <Compile Include="SlotMachine.cs" />
   </ItemGroup>
   <ItemGroup>

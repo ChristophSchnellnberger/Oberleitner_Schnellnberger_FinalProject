@@ -22,22 +22,22 @@ namespace Oberleitner_Schnellnberger_FinalProject
             List<int> list = new List<int>();
             double InsertOfUser = 0;
             bool validInputMoney = false;
-            bool userWin;
-
+            bool userWin=false;
+            string game = "Slot Game";
             #endregion
-            switch (choosenGame)
+           
+            if (choosenGame==1)
             {
-                case (1):
-                    {
-                        break;
-                    }
+                game = "Slot Game";
             }
-
-                    
+            if (choosenGame==2)
+            {
+                game = "Shell Game";
+            }     
             do
             {
-                Console.WriteLine("Welcome to the SlotMachine");
-                Console.WriteLine("Please type \"P\" to confirm");
+                Console.WriteLine("Welcome to the " + game );
+                Console.WriteLine("Please type \"P\" to play");
                 Console.WriteLine("Please type \"X\" to exit");
                 inputUser = Console.ReadLine().ToLower().Trim();
                 Console.Clear();
@@ -67,8 +67,16 @@ namespace Oberleitner_Schnellnberger_FinalProject
                     if (actualPlayer.Credit - InsertOfUser >= 0)
                     {
                         actualPlayer.Credit = actualPlayer.Credit - InsertOfUser;
-                        userWin = SlotMachine.SlotGame(actualPlayer);
-
+                        //Play choosen game
+                        if (choosenGame == 1)
+                        {
+                            userWin = SlotMachine.SlotGame(actualPlayer);
+                        }
+                        if (choosenGame == 2)
+                        {
+                            userWin = ShellMaschine.ShellGame(actualPlayer);
+                        }
+                        //Display result
                         if (userWin==true)
                         {
                             actualPlayer.Credit = actualPlayer.Credit + (InsertOfUser * 2);
