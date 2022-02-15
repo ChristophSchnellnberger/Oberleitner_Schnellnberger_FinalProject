@@ -574,7 +574,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 choosenValue = choosenValue.Trim();
                 int value;
                 userinput = Program.CheckDatasFromMainMenue(choosenValue);
-
+                Console.Clear();
                 switch (userinput)
                 {
                     case 1:

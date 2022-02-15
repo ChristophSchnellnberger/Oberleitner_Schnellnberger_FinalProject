@@ -92,6 +92,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 string choosenValue = Console.ReadLine();
                 choosenValue = choosenValue.ToLower();
                 choosenValue = choosenValue.Trim();
+                Console.Clear();
                 #endregion
 
                 userinput = CheckDatasFromMainMenue(choosenValue);
