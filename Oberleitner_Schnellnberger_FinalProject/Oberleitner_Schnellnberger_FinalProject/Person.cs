@@ -202,9 +202,9 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 int error = 0;
                 try
                 {
-                    bool validInputYear = CheckBirthdate((value.Year).ToString(), DateTime.Now.Year-120, DateTime.Now.Year - 18);
-                    bool validInputMonth = CheckBirthdate((value.Month).ToString(),DateTime.MinValue.Month,DateTime.MaxValue.Month);
-                    bool validInputDay = CheckBirthdate((value.Day).ToString(),DateTime.MinValue.Day,DateTime.MaxValue.Day);
+                    bool validInputYear = CheckBirthdate((value.Year).ToString(), DateTime.Now.Year - 120, DateTime.Now.Year - 18);
+                    bool validInputMonth = CheckBirthdate((value.Month).ToString(), DateTime.MinValue.Month, DateTime.MaxValue.Month);
+                    bool validInputDay = CheckBirthdate((value.Day).ToString(), DateTime.MinValue.Day, DateTime.MaxValue.Day);
 
                     if (validInputYear && validInputMonth && validInputDay == true)
                     {
@@ -719,15 +719,15 @@ namespace Oberleitner_Schnellnberger_FinalProject
             }
 
         }
-     
+
         #endregion
 
         #region constructor
-        public Person() : this("fistName", "surname", DateTime.Parse("01.01.2000"), Gender.male, "Musterstrasse", 01, 4811, "Musterstadt","Pas§word123", 0)
+        public Person() : this("fistName", "surname", DateTime.Parse("01.01.2000"), Gender.male, "Musterstrasse", 01, 4811, "Musterstadt", "Pas§word123", 0)
         {
         }
         public Person(string firstName, string surname, DateTime dateOfBirth, Gender gender, string street,
-                      int houseNumber, int postalCode, string cityName,string password, double credit)
+                      int houseNumber, int postalCode, string cityName, string password, double credit)
         {
             FirstName = firstName;
             Surname = surname;
@@ -932,6 +932,4 @@ namespace Oberleitner_Schnellnberger_FinalProject
         }
         #endregion
     }
-    
-    
 }

@@ -9,8 +9,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
 {
     internal class Casino
     {
-
-        public static void ChoosenGame(Person actualPlayer,string filePathPerson,string filePathUser,int choosenGame)
+        public static void ChoosenGame(Person actualPlayer, string filePathPerson, string filePathUser, int choosenGame)
         {
             #region values
             string[] threeCharCard = new string[3];
@@ -22,25 +21,22 @@ namespace Oberleitner_Schnellnberger_FinalProject
             List<int> list = new List<int>();
             double InsertOfUser = 0;
             bool validInputMoney = false;
-            bool userWin=false;
+            bool userWin = false;
             string game = "Slot Game";
             #endregion
 
-
-
-           
-            if (choosenGame==1)
+            if (choosenGame == 1)
             {
                 game = "Slot Game";
             }
-            if (choosenGame==2)
+            if (choosenGame == 2)
             {
                 game = "Shell Game";
-            }     
+            }
 
             do
             {
-                Console.WriteLine("Welcome to the " + game );
+                Console.WriteLine("Welcome to the " + game);
                 Console.WriteLine("Please type \"P\" to play");
                 Console.WriteLine("Please type \"X\" to exit");
                 inputUser = Console.ReadLine().ToLower().Trim();
@@ -49,7 +45,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 {
                     Console.WriteLine("Please type in one of the letters.");
                     continue;
-                }              
+                }
                 if (inputUser == "x")
                 {
                     break;
@@ -57,7 +53,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 validInputMoney = false;
 
                 while (validInputMoney == false)
-                {                    
+                {
                     do
                     {
                         Console.Clear();
@@ -81,7 +77,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                             userWin = ShellMaschine.ShellGame(actualPlayer);
                         }
                         //Display result
-                        if (userWin==true)
+                        if (userWin == true)
                         {
                             actualPlayer.Credit = actualPlayer.Credit + (InsertOfUser * 2);
                             Console.WriteLine("Congratulation, you won!");
@@ -99,21 +95,21 @@ namespace Oberleitner_Schnellnberger_FinalProject
                         Console.WriteLine("Sorry your credit is to low!");
                         Console.ReadKey();
                     }
-                    
+
                 }
                 Console.Clear();
                 Console.WriteLine();
                 Console.WriteLine("Your actual credit is: " + actualPlayer.Credit);
                 Console.ReadKey();
-            } 
+            }
             while (inputUser != "x");
 
             File.Delete(filePathUser);
             ProcessUserDatas.StreamWriterExcelRegisteredPerson(filePathUser, actualPlayer, ';');
             Person[] allPlayers = ProcessUserDatas.ReadPersonsFromCsv(filePathPerson, ';');
             int numberOfPersonInArray = ProcessUserDatas.NumberOfPersonInArray(actualPlayer.FirstName, actualPlayer.Surname, allPlayers);
-            
-            
+
+
             allPlayers[numberOfPersonInArray].Credit = actualPlayer.Credit;
             ProcessUserDatas.StreamWriterExcelPerson(filePathPerson, allPlayers);
         }

@@ -16,7 +16,6 @@ namespace Oberleitner_Schnellnberger_FinalProject
             #region Values
             string filePathPerson = "LoginDatas.csv";
             string loginfile = "actualPlayer.csv";
-            bool conversionSuccessful = false;
             char seperator = ';';
             #endregion
 
@@ -110,16 +109,16 @@ namespace Oberleitner_Schnellnberger_FinalProject
                                 break;
                             }
                             loggedinPerson = allUsers[arrayPlace];
-                            
+
                             do
-                            {                              
+                            {
                                 bool loginSucessfull = ProcessUserDatas.Login(loggedinPerson);
 
                                 if (loginSucessfull == false)
                                 {
                                     loginSucessfull = TryAgain();
 
-                                    if (loginSucessfull ==true)
+                                    if (loginSucessfull == true)
                                     {
                                         Console.WriteLine("Congratulation, you are loged in. \n Press enter to get further");
                                         Console.ReadKey();
@@ -179,7 +178,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 Console.WriteLine("Do you want to try again?");
                 Console.WriteLine("If yes, type \"y\" ; if not type \"n\" ");
                 userInput = Console.ReadLine();
-
+                Console.Clear();
                 if (userInput.ToLower().Trim() == "y")
                 {
                     return true;
@@ -580,39 +579,6 @@ namespace Oberleitner_Schnellnberger_FinalProject
             }
             Console.ForegroundColor = ConsoleColor.White;
             #endregion
-        }
-        private static int GetErrorCodeFromExeption(Exception exception)
-        {
-            if (exception is ArgumentNullException)
-            {
-                return 1;
-            }
-            if (exception is ArgumentException)
-            {
-                return 2;
-            }
-            if (exception is IOException)
-            {
-                return 7;
-            }
-            if (exception is FormatException)
-            {
-                return 9;
-            }
-
-            if (exception is OverflowException)
-            {
-                return 10;
-            }
-            if (exception is OutOfMemoryException)
-            {
-                return 14;
-            }
-            if (exception is ArgumentOutOfRangeException)
-            {
-                return 15;
-            }
-            return -1;
         }
         public static void Exeptions(int errorCode)
         {

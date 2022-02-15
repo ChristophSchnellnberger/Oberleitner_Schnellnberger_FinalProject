@@ -30,13 +30,13 @@ namespace Oberleitner_Schnellnberger_FinalProject
         }
         public static void ChargeBalance(Person bank, double inputData)
         {
-            if(CheckValidData(inputData)==true)
+            if (CheckValidData(inputData) == true)
             {
-                if(inputData > 0)
+                if (inputData > 0)
                 {
                     bank.Credit = bank.Credit + inputData;
                 }
-              
+
             }
             else
             {
@@ -48,10 +48,10 @@ namespace Oberleitner_Schnellnberger_FinalProject
         {
             if (CheckValidData(inputData) == true)
             {
-                if(bank.Credit >= inputData)
+                if (bank.Credit >= inputData)
                 {
                     bank.Credit = bank.Credit - inputData;
-                }               
+                }
             }
             else
             {

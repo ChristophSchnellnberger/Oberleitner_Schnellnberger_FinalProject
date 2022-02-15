@@ -11,6 +11,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
     {
         public static bool ShellGame(Person actualPlayer)
         {
+            #region Values
             bool userWin = false;
             List<int> list = new List<int>();
             string[] threeCharCard = new string[3];
@@ -18,14 +19,20 @@ namespace Oberleitner_Schnellnberger_FinalProject
             threeCharCard[0] = "\x2666";
             threeCharCard[1] = "\x2666";
             threeCharCard[2] = "\x2665";
-            int[] randomValues=new int[3];
+            int[] randomValues = new int[3];
             Random random = new Random();
             int choosenValue;
             int k = 3;
+<<<<<<< HEAD
+            #endregion
+
+=======
             bool conversionSuccessfull;
+>>>>>>> 9d48dd83969255cb8de54fd2ef2da817f857a367
             for (int i = 0; i < 10; i++)
             {
                 list.Clear();
+
                 for (int j = 0; j < randomValues.Length; j++)
                 {
                     int value = random.Next(3);
@@ -39,21 +46,36 @@ namespace Oberleitner_Schnellnberger_FinalProject
                         list.Add(value);
                     }
                 }
+
                 randomValues = list.ToArray();
                 k = 3;
                 Console.Clear();
+
                 foreach (var item in randomValues)
                 {
                     Console.SetCursorPosition((Console.WindowWidth - k) / 2, Console.CursorTop);
                     Console.Write(threeCharCard[item]);
-                    k=k-2;
+                    k = k - 2;
                 }
+
                 Thread.Sleep(500);
                 Console.Clear();
                 Console.SetCursorPosition((Console.WindowWidth - 3) / 2, Console.CursorTop);
                 Console.Write("\x2666" + "\x2666" + "\x2666");
             }
+
             Console.WriteLine();
+<<<<<<< HEAD
+            Console.WriteLine("At which kind of place do you think is the heart? (0, 1 or 2)");
+
+            do
+            {
+                int.TryParse(Console.ReadLine(), out choosenValue);
+            }
+            while (false);
+
+            if (2 == randomValues[choosenValue])
+=======
             do
             {
                 Console.WriteLine("At which kind of place do you think is the heart? (0, 1 or 2)");
@@ -68,14 +90,17 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 }
             } while (!conversionSuccessfull);
            if (2 == randomValues[choosenValue])
+>>>>>>> 9d48dd83969255cb8de54fd2ef2da817f857a367
             {
                 userWin = true;
             }
-           else
+            else
             {
                 userWin = false;
             }
+
             Console.WriteLine("The result was: ");
+
             k = 3;
             foreach (var item in randomValues)
             {
@@ -83,12 +108,13 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 Console.Write(threeCharCard[item]);
                 k = k - 2;
             }
+
             Console.WriteLine();
             Console.WriteLine("Please press enter for futher actions!");
             Console.ReadKey();
             Console.Clear();
+
             return userWin;
         }
-
     }
 }

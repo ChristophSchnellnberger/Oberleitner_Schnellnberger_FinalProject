@@ -19,7 +19,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
             threeCharCard[2] = "\x2666";
             List<int> list = new List<int>();
             bool userWin;
-           
+
             #endregion
 
             Random random = new Random();
@@ -52,7 +52,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
             }
             else
             {
-                userWin=false;
+                userWin = false;
             }
             return userWin;
 
@@ -82,9 +82,6 @@ namespace Oberleitner_Schnellnberger_FinalProject
             //Console.OutputEncoding = System.Text.Encoding.Unicode;
             //Console.ReadKey();
             #endregion
-
-
-
         }
     }
 }

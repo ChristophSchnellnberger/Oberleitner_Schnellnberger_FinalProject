@@ -24,7 +24,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                         reader.ReadLine();
                     }
 
-                    while (reader.Peek() != -1) 
+                    while (reader.Peek() != -1)
                     {
                         string line = reader.ReadLine();
                         string[] values = line.Split(seperator);
@@ -168,7 +168,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                             writer.Write(";");
                             writer.Write(person.Credit);
                             writer.WriteLine();
-                            
+
                         }
                     }
                 }
@@ -259,7 +259,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
 
                 string content = newUser.FirstName + seperator + newUser.Surname + seperator + newUser.PersonGender + seperator +
                              newUser.DateOfBirth.Date.ToString() + seperator + newUser.Street + seperator + newUser.HouseNumber.ToString() +
-                             seperator + newUser.PostalCode.ToString() + seperator + newUser.CityName + seperator + newUser.Password+seperator+newUser.Credit;
+                             seperator + newUser.PostalCode.ToString() + seperator + newUser.CityName + seperator + newUser.Password + seperator + newUser.Credit;
 
                 File.AppendAllText(filePath, content);
             }
@@ -416,90 +416,90 @@ namespace Oberleitner_Schnellnberger_FinalProject
         {
             int error = 0;
             int placeInArray = 0;
-            
-                try
-                {
-                    Console.Clear();
-                    Console.WriteLine("Please type in your first Name!");
-                    string inputFirstName = Console.ReadLine();
-                    inputFirstName = firstCharToUpper(inputFirstName);
-                    Console.WriteLine("Please type in your surname");
-                    string inputSurname = Console.ReadLine();
-                    inputSurname = firstCharToUpper(inputSurname);
 
-                    placeInArray = NumberOfPersonInArray(inputFirstName, inputSurname, allPersons);
+            try
+            {
+                Console.Clear();
+                Console.WriteLine("Please type in your first Name!");
+                string inputFirstName = Console.ReadLine();
+                inputFirstName = firstCharToUpper(inputFirstName);
+                Console.WriteLine("Please type in your surname");
+                string inputSurname = Console.ReadLine();
+                inputSurname = firstCharToUpper(inputSurname);
 
-                    if (placeInArray == -1)
-                    {
-                        Console.WriteLine("This name cannot be found");
-                        Console.WriteLine("Please try again or register a new person");
-                        Console.ReadKey();
-                    }
-                }
-                #region catches
-                catch (ArgumentOutOfRangeException)
-                {
-                    error = 15;
-                }
-                catch (ArgumentNullException)
-                {
-                    error = 1;
-                }
-                catch (ArgumentException)
-                {
-                    error = 2;
-                }
-                catch (OutOfMemoryException)
-                {
-                    error = 14;
-                }
-                catch (FormatException)
-                {
-                    error = 9;
-                }
-                catch (OverflowException)
-                {
-                    error = 10;
-                }
-                catch (IndexOutOfRangeException)
-                {
-                    error = 11;
-                }
-                catch (NotSupportedException)
-                {
-                    error = 12;
-                }
-                catch (DirectoryNotFoundException)
-                {
-                    error = 3;
-                }
-                catch (PathTooLongException)
-                {
-                    error = 4;
-                }
-                catch (UnauthorizedAccessException)
-                {
-                    error = 5;
-                }
-                catch (System.Security.SecurityException)
-                {
-                    error = 13;
-                }
-                catch (FileNotFoundException)
-                {
-                    error = 6;
-                }
-                catch (IOException)
-                {
-                    error = 7;
-                }
-                catch (Exception)
-                {
-                    error = 8;
-                }
+                placeInArray = NumberOfPersonInArray(inputFirstName, inputSurname, allPersons);
 
-                Program.Exeptions(error);
-                #endregion           
+                if (placeInArray == -1)
+                {
+                    Console.WriteLine("This name cannot be found");
+                    Console.WriteLine("Please try again or register a new person");
+                    Console.ReadKey();
+                }
+            }
+            #region catches
+            catch (ArgumentOutOfRangeException)
+            {
+                error = 15;
+            }
+            catch (ArgumentNullException)
+            {
+                error = 1;
+            }
+            catch (ArgumentException)
+            {
+                error = 2;
+            }
+            catch (OutOfMemoryException)
+            {
+                error = 14;
+            }
+            catch (FormatException)
+            {
+                error = 9;
+            }
+            catch (OverflowException)
+            {
+                error = 10;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                error = 11;
+            }
+            catch (NotSupportedException)
+            {
+                error = 12;
+            }
+            catch (DirectoryNotFoundException)
+            {
+                error = 3;
+            }
+            catch (PathTooLongException)
+            {
+                error = 4;
+            }
+            catch (UnauthorizedAccessException)
+            {
+                error = 5;
+            }
+            catch (System.Security.SecurityException)
+            {
+                error = 13;
+            }
+            catch (FileNotFoundException)
+            {
+                error = 6;
+            }
+            catch (IOException)
+            {
+                error = 7;
+            }
+            catch (Exception)
+            {
+                error = 8;
+            }
+
+            Program.Exeptions(error);
+            #endregion
 
             return placeInArray;
         }
@@ -547,9 +547,9 @@ namespace Oberleitner_Schnellnberger_FinalProject
                 {
                     Console.ForegroundColor = ConsoleColor.Gray;
                 }
-                if(actualUser.Credit <0) 
-                { 
-                    Console.ForegroundColor = ConsoleColor.Red; 
+                if (actualUser.Credit < 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
                 }
                 #endregion
 
@@ -585,7 +585,7 @@ namespace Oberleitner_Schnellnberger_FinalProject
                                 int.TryParse(Console.ReadLine(), out value);
                             }
                             while (false);
-                            
+
                             Casino.ChoosenGame(actualPlayer, filePathPerson, filePathUser, value);
                             break;
                         }
@@ -672,7 +672,5 @@ namespace Oberleitner_Schnellnberger_FinalProject
             }
             return false;
         }
-
-
     }
 }
