@@ -23,12 +23,9 @@ namespace Oberleitner_Schnellnberger_FinalProject
             Random random = new Random();
             int choosenValue;
             int k = 3;
-<<<<<<< HEAD
+
             #endregion
 
-=======
-            bool conversionSuccessfull;
->>>>>>> 9d48dd83969255cb8de54fd2ef2da817f857a367
             for (int i = 0; i < 10; i++)
             {
                 list.Clear();
@@ -65,7 +62,6 @@ namespace Oberleitner_Schnellnberger_FinalProject
             }
 
             Console.WriteLine();
-<<<<<<< HEAD
             Console.WriteLine("At which kind of place do you think is the heart? (0, 1 or 2)");
 
             do
@@ -75,22 +71,6 @@ namespace Oberleitner_Schnellnberger_FinalProject
             while (false);
 
             if (2 == randomValues[choosenValue])
-=======
-            do
-            {
-                Console.WriteLine("At which kind of place do you think is the heart? (0, 1 or 2)");
-                conversionSuccessfull = int.TryParse(Console.ReadLine(), out choosenValue);
-                if (choosenValue >= 0 && choosenValue <= 2)
-                {
-                    conversionSuccessfull = true;
-                }
-                else
-                {
-                    conversionSuccessfull = false;
-                }
-            } while (!conversionSuccessfull);
-           if (2 == randomValues[choosenValue])
->>>>>>> 9d48dd83969255cb8de54fd2ef2da817f857a367
             {
                 userWin = true;
             }
